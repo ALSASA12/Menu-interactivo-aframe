@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+</head>
+<body>
+  <a-scene>
+    <!-- Cámara -->
+    <a-entity id="camara" camera position="8 2 2"></a-entity>
+
+    <!--Paredes y techo -->
+    <a-entity id="wall1" geometry="primitive: box" material="color: #ff0000"></a-entity>
+    <a-entity id="wall2" geometry="primitive: box" material="color: #00ff00" rotation="0 180 0"></a-entity>
+    <a-entity id="wall3" geometry="primitive: box" material="color: #0000ff" rotation="0 0 0"></a-entity>
+    <a-entity id="wall4" geometry="primitive: box" material="color: #ffff00" rotation="0 0 0"></a-entity>
+    <a-entity id="roof" geometry="primitive: box" material="color: #ffffff"></a-entity>
+    
+    <!--puerta-->
+    <a-entity id="puerta" geometry="primitive: box; width: 1; height: 2; depth: 0.1" material="color: #808080" ></a-entity>
+
+    <!--select-bar -->
+    <a-entity id="select-bar" a-follow="leftController" position="0 0 -0.5" rotation="0 0 0" >
+      <a-plane width="2" height="2" color="#00000"></a-plane>
+      <a-text value="Option 1" position="0 0.5 0" align="center" color="#000" normal-scale="0.5 0.5 0.5"></a-text>
+      <a-text value="Option 2" position="0 -0.5 0" align="center"color="#000"></a-text>
+      <a-cursor></a-cursor>
+    </a-entity>
+
+    <!-- Controlador de cámara -->
+    <a-entity id="controller" position="0 0 0" rotation="0 0 0">
+        <a-camera look-controls></a-camera>
+    </a-entity>
+    <!-- Controlador de mano izquierda -->
+    <a-entity id="leftController" hand-controls="hand: left" ; wasd-controls oculus-touch-controls="hand: left" vive-controls="hand: left" >
+      <a-entity select-bar="select-bar" id="menuActions"  position="0 0.05 0.08" rotation="-85 0 0"></a-entity><!--scale="0.7 0.7 0.7"-->
+    </a-entity>
+  </a-scene>
+
+  <script src="./room.js"></script> <!--Ajustar tamaño-->
+  <!--<script src="./toolbar.js"></script>-->
+  
+  <script>document.getElementById('camara').setAttribute('position', '2 2 -2');</script><!--Movimiento de la camara no borrar-->
+
+</body>
+</html>
+
+

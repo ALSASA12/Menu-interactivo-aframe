@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>A-Frame Room with Select Bar</title>
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+</head>
+<body>
+  <a-scene>
+    <a-entity id="camera" camera position="8 2 2"></a-entity>
+
+    <a-entity id="wall1" geometry="primitive: box" material="color: #ff0000"></a-entity>
+    <a-entity id="wall2" geometry="primitive: box" material="color: #00ff00" rotation="0 180 0"></a-entity>
+    <a-entity id="wall3" geometry="primitive: box" material="color: #0000ff" rotation="0 0 0"></a-entity>
+    <a-entity id="wall4" geometry="primitive: box" material="color: #ffff00" rotation="0 0 0"></a-entity>
+    <a-entity id="roof" geometry="primitive: box" material="color: #ffffff"></a-entity>
+
+    <a-entity id="select-bar" a-follow="target: #hand-left" position="0 0 -0.5" rotation="0 0 0">
+      <a-plane width="0.2" height="0.1" material="color: #ffffff"></a-plane>
+      <a-text value="Option 1" position="0 0.05 0" align="center" color="#000000"></a-text>
+      <a-text value="Option 2" position="0 -0.05 0" align="center" color="#000000"></a-text>
+      <a-cursor></a-cursor>
+    </a-entity>
+
+    <a-entity id="controller" position="0 0 0" rotation="0 0 0">
+      <a-camera look-controls></a-camera>
+    </a-entity>
+    <a-entity id="leftController" debug-controls="menuID: menuActions" wasd-controls oculus-touch-controls="hand: left" vive-controls="hand: left">
+      <a-entity select-bar="controllerID: leftController" id="menuActions" scale="0.7 0.7 0.7" position="0 0.05 0.08" rotation="-85 0 0">
+        <optgroup label="Actions" value="actions">
+          <option value="teleport" src="">Teleport</option>
+        </optgroup>
+      </a-entity>
+    </a-entity>
+  </a-scene>
+  <script src="./room.js"></script>
+  <script>
+    AFRAME.registerComponent('select-bar', {
+      init: function () {
+        const plane = this.el.querySelector('a-plane');
+        const options = this.el.querySelectorAll('a-text');
+        const cursor = this.el.querySelector('a-cursor');
+
+        // Initialize selected option
+        let selectedOption = options[0];
+        selectedOption.setAttribute('material', 'color: #000000');
+
+        // Event listener for cursor click
+        cursor.addEventListener('click', (event) => {
+          const clickedOption = event.detail.target;
+          if (clickedOption && options.includes(clickedOption)) {
+            // Update selected option visually
+            selectedOption.setAttribute('material', 'color: #ffffff');
+            selectedOption = clickedOption;
+            selectedOption.setAttribute('material', 'color: #000000');
+
+            // Emit an event to communicate the selected option
+            this.el.emit('option-selected', { selected: selectedOption.getAttribute('value') });
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
