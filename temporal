@@ -1,2 +1,37 @@
 
 <a-entity id="puerta" geometry="primitive: box; width: 1; height: 2; depth: 0.1" material="color: #808080" position="0 1 3.95"></a-entity>
+//   const plane = this.el.querySelector('a-plane');
+    //   const options = this.el.querySelectorAll('a-text');
+    //   const cursor = this.el.querySelector('a-cursor');
+  
+    //   let selectedOption = null;
+  
+    //   cursor.addEventListener('click', (event) => {
+    //     const clickedOption = event.detail.target;
+    //     if (clickedOption && options.includes(clickedOption)) {
+    //       if (selectedOption) {
+    //         selectedOption.setAttribute('material', 'color: #ffffff');
+    //       }
+    //       selectedOption = clickedOption;
+    //       selectedOption.setAttribute('material', 'color: #000000');
+  
+    //       // Trigger an event to communicate the selected option
+    //       this.el.emit('option-selected', { selected: selectedOption.getAttribute('value') });
+    //     }
+    //   });
+  
+    //   // Set initial option
+    //   selectedOption = options[0];
+    //   selectedOption.setAttribute('material', 'color: #000000');
+
+    function spawnObject() {
+        var spawnedObjects = document.getElementById('spawnedObjects');
+        var newObject = document.createElement('a-box');
+        newObject.setAttribute('position', '0 1.5 -3');
+        newObject.setAttribute('color', 'black');
+        newObject.setAttribute('grabbable', '');
+        spawnedObjects.appendChild(newObject);
+      }
+  
+      // Event listener para el botón de spawnear objetos
+      document.querySelector('[spawn-button]').addEventListener('click', spawnObject);

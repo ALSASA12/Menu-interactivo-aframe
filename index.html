@@ -3,9 +3,11 @@
 <head>
   <meta charset="utf-8">
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <script src="https://upkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+  <script src="https://unpkg.com/super-hands@^3.0.3/dist/super-hands.min.js"></script>
 </head>
 <body>
-  <a-scene>
+  <a-scene room-resizer="altura: 3; ancho: 10; largo: 10">
     <!-- Cámara -->
     <a-entity id="camara" camera position="8 2 2"></a-entity>
 
@@ -17,28 +19,36 @@
     <a-entity id="roof" geometry="primitive: box" material="color: #ffffff"></a-entity>
     
     <!--puerta-->
-    <a-entity id="puerta" geometry="primitive: box; width: 1; height: 2; depth: 0.1" material="color: #808080" ></a-entity>
-
-    <!--select-bar -->
-    <a-entity id="select-bar" a-follow="leftController" position="0 0 -0.5" rotation="0 0 0" >
-      <a-plane width="2" height="2" color="#00000"></a-plane>
-      <a-text value="Option 1" position="0 0.5 0" align="center" color="#000" normal-scale="0.5 0.5 0.5"></a-text>
-      <a-text value="Option 2" position="0 -0.5 0" align="center"color="#000"></a-text>
-      <a-cursor></a-cursor>
-    </a-entity>
-
+    <!-- <a-entity id="puerta" geometry="primitive: box; width: 1; height: 2; depth: 0.1" material="color: #808080" ></a-entity> -->
     <!-- Controlador de cámara -->
     <a-entity id="controller" position="0 0 0" rotation="0 0 0">
         <a-camera look-controls></a-camera>
     </a-entity>
     <!-- Controlador de mano izquierda -->
-    <a-entity id="leftController" hand-controls="hand: left" ; wasd-controls oculus-touch-controls="hand: left" vive-controls="hand: left" >
-      <a-entity select-bar="select-bar" id="menuActions"  position="0 0.05 0.08" rotation="-85 0 0"></a-entity><!--scale="0.7 0.7 0.7"-->
+    <a-entity id="leftHand" sphere-collider="objects: a-box"  hand-tracking-controls="hand: left"><!--hand-tracking-extras ; wasd-controls oculus-touch-controls="hand: left"-->
+      <a-entity id="menu"  a-follow="leftHand" position="0 0.05 0.08" rotation="-85 0 0" normal-scale="0.2 0.2 0.2">
+        <a-plane width="0.5" height="0.5" color="#FFFFFF"></a-plane>
+        <a-text id="Option 1" value="Option 1"  width="0.5" height="0.5" position="0 0.1 0" align="center" color="#000000" ></a-text>
+        <a-text id="Option 2" value="Option 2"  width="0.5" height="0.5"position="0 -0.1 0" align="center"color="#000000"></a-text>
+      <a-cursor></a-cursor>
+      </a-entity>
+    </a-entity>
+    <a-box  id='cajita' position="0 1.5 -1" color="black" grabbable draggable></a-box>
+    <a-entity id="rightHand" sphere-collider="objects: a-box"  hand-tracking-controls="hand: right" superhands ><!-- hand-tracking-extras ; wasd-controls oculus-touch-controls="hand: right"  -->
+      <!-- <a-entity id="spawnedObjects"></a-entity>esto es para cuando spwanee objetos -->
+    </a-entity>
+    <a-entity id="gestureDetector" 
+      event-set__pinchstarted="_event: pinchstarted; _target: #cajita"
+      event-set__pinchended="_event: pinchended; _target: #cajita"
+      event-set__pinchmoved="_event: pinchmoved; _target: #cajita"
+      event-set__dragstarted="_event: dragstarted; _target: #cajita"
+      event-set__dragended="_event: dragended; _target: #cajita"
+      event-set__dragging="_event: dragging; _target: #cajita">
     </a-entity>
   </a-scene>
 
   <script src="./room.js"></script> <!--Ajustar tamaño-->
-  <!--<script src="./toolbar.js"></script>-->
+  <script src="./select_bar.js"></script>
   
   <script>document.getElementById('camara').setAttribute('position', '2 2 -2');</script><!--Movimiento de la camara no borrar-->
 
