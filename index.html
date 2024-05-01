@@ -25,7 +25,7 @@
         <a-camera look-controls></a-camera>
     </a-entity>
     <!-- Controlador de mano izquierda -->
-    <a-entity id="leftHand" sphere-collider="objects: a-box"  hand-tracking-controls="hand: left"><!--hand-tracking-extras ; wasd-controls oculus-touch-controls="hand: left"-->
+    <a-entity id="leftHand" sphere-collider="objects: a-box"  super-hands hand-controls="hand: left" oculus-go-controls><!--hand-tracking-extras ; wasd-controls oculus-touch-controls="hand: left"-->
       <a-entity id="menu"  a-follow="leftHand" position="0 0.05 0.08" rotation="-85 0 0" normal-scale="0.2 0.2 0.2">
         <a-plane width="0.5" height="0.5" color="#FFFFFF"></a-plane>
         <a-text id="Option 1" value="Option 1"  width="0.5" height="0.5" position="0 0.1 0" align="center" color="#000000" ></a-text>
@@ -33,8 +33,8 @@
       <a-cursor></a-cursor>
       </a-entity>
     </a-entity>
-    <a-box  id='cajita' position="0 1.5 -1" color="black" grabbable draggable></a-box>
-    <a-entity id="rightHand" sphere-collider="objects: a-box"  hand-tracking-controls="hand: right" superhands ><!-- hand-tracking-extras ; wasd-controls oculus-touch-controls="hand: right"  -->
+    <!-- <a-box  id='cajita' position="0 1.5 -1" color="black" grabbable draggable></a-box> -->
+    <a-entity id="rightHand" sphere-collider="objects: a-box"  super-hands hand-controls="hand: right" oculus-go-controls ><!-- hand-tracking-extras ; wasd-controls oculus-touch-controls="hand: right"  -->
       <!-- <a-entity id="spawnedObjects"></a-entity>esto es para cuando spwanee objetos -->
     </a-entity>
     <a-entity id="gestureDetector" 
@@ -47,8 +47,8 @@
     </a-entity>
   </a-scene>
 
-  <script src="./room.js"></script> <!--Ajustar tamaño-->
-  <script src="./select_bar.js"></script>
+  <script src="./javacript/room.js"></script> <!--Ajustar tamaño-->
+  <script src="./javacript/"></script>
   
   <script>document.getElementById('camara').setAttribute('position', '2 2 -2');</script><!--Movimiento de la camara no borrar-->
 
