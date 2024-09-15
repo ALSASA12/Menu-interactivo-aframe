@@ -7,6 +7,7 @@ document.querySelector('a-scene').addEventListener('loaded', function () {
         var camera = document.querySelector('#camara');
         var cameraPosition = camera.getAttribute('position');
 
+        newSquare.setAttribute('position',cameraPosition)
         newSquare.setAttribute('color', 'purple');//caracteristicas del cuadrado
         newSquare.setAttribute('width', '0.1');
         newSquare.setAttribute('height', '0.1');

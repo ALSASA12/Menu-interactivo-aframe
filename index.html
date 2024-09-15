@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-  <script src="https://upkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
-  <script src="https://unpkg.com/super-hands@^3.0.3/dist/super-hands.min.js"></script>
+  <script src="//aframe.io/releases/1.6.0/aframe.min.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/gh/MozillaReality/ammo.js@8bbc0ea/builds/ammo.wasm.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.js"></script>
+  <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-super-hands-component/dist/aframe-super-hands-component.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe-extras/dist/aframe-extras.min.js"></script>
+  <!-- <script src="https://unpkg.com/super-hands@^3.0.3/dist/super-hands.min.js"></script> -->
 </head>
 <body>
-  <a-scene room-resizer="altura: 3; ancho: 10; largo: 10">
+  <a-scene physics="driver: ammo;gravity: 0 0 0;" interaction-hands room-resizer="altura: 3; ancho: 10; largo: 10">
+
+    <a-entity id="leftHand" hand-tracking-grab-controls="hand: left;" >
+      <a-plane id="select-bar" position="0 0.15 0" rotation="0 0 0" width="0.3" height="0.2" color="#7BC8A4">
+        <!-- <a-text id='boton1' class="clickable" value="Texto Superior" color="black"  position="0 0.05 0.01" width="0.6" grabbable></a-text>
+        <a-text id='boton2' class="clickable" value="Texto Inferior" color="black" position="0 -0.05 0.01" width="0.6" clickable></a-text> -->
+    </a-entity>
+    <a-entity id="rightHand" hand-tracking-grab-controls="hand: right;">
+      
+    </a-entity>
+    
+    
     <!-- Cámara -->
     <a-entity id="camara" camera position="8 2 2"></a-entity>
 
@@ -17,39 +32,20 @@
     <a-entity id="wall3" geometry="primitive: box" material="color: #0000ff" rotation="0 0 0"></a-entity>
     <a-entity id="wall4" geometry="primitive: box" material="color: #ffff00" rotation="0 0 0"></a-entity>
     <a-entity id="roof" geometry="primitive: box" material="color: #ffffff"></a-entity>
-    
-    <!--puerta-->
-    <!-- <a-entity id="puerta" geometry="primitive: box; width: 1; height: 2; depth: 0.1" material="color: #808080" ></a-entity> -->
+
     <!-- Controlador de cámara -->
     <a-entity id="controller" position="0 0 0" rotation="0 0 0">
         <a-camera look-controls></a-camera>
     </a-entity>
-    <!-- Controlador de mano izquierda -->
-    <a-entity id="leftHand" sphere-collider="objects: a-box"  super-hands hand-controls="hand: left" oculus-go-controls><!--hand-tracking-extras ; wasd-controls oculus-touch-controls="hand: left"-->
-      <a-entity id="menu"  a-follow="leftHand" position="0 0.05 0.08" rotation="-85 0 0" normal-scale="0.2 0.2 0.2">
-        <a-plane width="0.5" height="0.5" color="#FFFFFF"></a-plane>
-        <a-text id="Option 1" value="Option 1"  width="0.5" height="0.5" position="0 0.1 0" align="center" color="#000000" ></a-text>
-        <a-text id="Option 2" value="Option 2"  width="0.5" height="0.5"position="0 -0.1 0" align="center"color="#000000"></a-text>
-      <a-cursor></a-cursor>
-      </a-entity>
-    </a-entity>
-    <!-- <a-box  id='cajita' position="0 1.5 -1" color="black" grabbable draggable></a-box> -->
-    <a-entity id="rightHand" sphere-collider="objects: a-box"  super-hands hand-controls="hand: right" oculus-go-controls ><!-- hand-tracking-extras ; wasd-controls oculus-touch-controls="hand: right"  -->
-      <!-- <a-entity id="spawnedObjects"></a-entity>esto es para cuando spwanee objetos -->
-    </a-entity>
-    <a-entity id="gestureDetector" 
-      event-set__pinchstarted="_event: pinchstarted; _target: #cajita"
-      event-set__pinchended="_event: pinchended; _target: #cajita"
-      event-set__pinchmoved="_event: pinchmoved; _target: #cajita"
-      event-set__dragstarted="_event: dragstarted; _target: #cajita"
-      event-set__dragended="_event: dragended; _target: #cajita"
-      event-set__dragging="_event: dragging; _target: #cajita">
-    </a-entity>
-  </a-scene>
 
-  <script src="./javacript/room.js"></script> <!--Ajustar tamaño-->
-  <script src="./javacript/"></script>
-  
+    
+    <a-box  id='cajita' position="0 1.5 -1" color="black" ></a-box>
+
+    <!-- <a-entity id="menu"  a-follow="leftHand" position="0 0.05 0.08" rotation="-85 0 0" normal-scale="0.2 0.2 0.2"></a-entity> --> 
+  <script src="./js/room.js"></script> <!--Ajustar tamaño-->
+  <script src="./js/interaction-hands.js"></script>
+  <!--<script src="./js/prueba.js"></script> -->
+  <!-- <script src="./javascript/" -->
   <script>document.getElementById('camara').setAttribute('position', '2 2 -2');</script><!--Movimiento de la camara no borrar-->
 
 </body>
