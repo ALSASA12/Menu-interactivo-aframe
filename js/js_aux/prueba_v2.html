@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Colisión con Mano en A-Frame</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/MozillaReality/ammo.js@8bbc0ea/builds/ammo.wasm.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.3.4/dist/aframe-environment-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+</head>
+<body>
+    <a-scene >
+        <!-- Cámara -->
+        <a-entity camera id="camara" look-controls position="0 1.6 0"></a-entity>
+
+        <!-- Piso con cuerpo físico estático -->
+        <a-plane id="floor" ammo-body="type: static" ammo-shape="type: box"
+                 position="0 0 -2" rotation="-90 0 0" width="10" height="10"
+                 color="yellow"></a-plane>
+
+        <!-- Caja con físico para interacción -->
+        <a-box id="box";grabbable; collision-listener;  pinchable: true; ammo-body="type: dynamic; emitCollisionEvents: true"; ammo-shape="type: box";
+               position="0 0.5 -1"; width="2"; height="4"; depth="1"; color="blue"></a-box>
+
+        <!-- Manos con control de agarre -->
+        <a-entity id="rightHand" hand-tracking-grab-controls="hand: right;"></a-entity>
+        <a-entity id="LeftHand" hand-tracking-grab-controls="hand: left;" ></a-entity>
+    </a-scene>
+
+    <script>
+      // Componente para detectar y manejar el gesto de pellizco
+      AFRAME.registerComponent('pinchable', {
+        schema: {
+          pinchDistance: { default: 100 }
+        },
+
+        init: function () {
+          var sceneEl = this.el.sceneEl;
+          this.worldPosition = new THREE.Vector3();
+          this.bindMethods();
+          this.pinched = false;
+          sceneEl.addEventListener('pinchstarted', this.onPinchStarted);
+        },
+
+        bindMethods: function () {
+          this.onPinchStarted = this.onPinchStarted.bind(this);
+        },
+
+        onPinchStarted: function (evt) {
+          var pinchDistance = this.calculatePinchDistance(evt.detail.position);
+          if (pinchDistance < this.data.pinchDistance) {
+            this.el.emit('pinchedstarted');
+            this.pinched = true;
+          }
+        },
+
+        calculatePinchDistance: function (pinchWorldPosition) {
+          var el = this.el;
+          var worldPosition = this.worldPosition;
+          var pinchDistance;
+
+          worldPosition.copy(el.object3D.position);
+          el.object3D.parent.updateMatrixWorld();
+          el.object3D.parent.localToWorld(worldPosition);
+
+          pinchDistance = worldPosition.distanceTo(pinchWorldPosition);
+
+          return pinchDistance;
+        },
+      });
+
+      // Componente para escuchar eventos de colisión
+      AFRAME.registerComponent('collision-listener', {
+        init: function () {
+            const el = this.el;
+            this.el.addEventListener('pinchedstarted', function () {
+              el.setAttribute('color', 'red'); // Cambiar el color a rojo cuando se detecta el pinchstarted
+            });
+        }
+      });
+    </script>
+</body>
+</html>

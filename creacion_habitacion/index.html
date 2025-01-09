@@ -11,14 +11,14 @@
   <!-- <script src="https://unpkg.com/super-hands@^3.0.3/dist/super-hands.min.js"></script> -->
 </head>
 <body>
-  <a-scene physics="driver: ammo;gravity: 0 0 0;" interaction-hands room-resizer="altura: 3; ancho: 10; largo: 10">
+  <a-scene physics="driver: ammo;gravity: 0 0 0;debug: true" interaction-hands room-resizer="altura: 3; ancho: 10; largo: 10">
 
-    <a-entity id="leftHand" hand-tracking-grab-controls="hand: left;" >
-      <a-plane id="select-bar" position="0 0.15 0" rotation="0 0 0" width="0.3" height="0.2" color="#7BC8A4">
-        <!-- <a-text id='boton1' class="clickable" value="Texto Superior" color="black"  position="0 0.05 0.01" width="0.6" grabbable></a-text>
-        <a-text id='boton2' class="clickable" value="Texto Inferior" color="black" position="0 -0.05 0.01" width="0.6" clickable></a-text> -->
+    <a-entity id="leftHand" hand-tracking-grab-controls="hand: left;" obb-collider>
+      <a-plane id="menu-plane" position="0 0.15 0" rotation="0 0 0" width="0.3" height="0.3" color="#7BC8A4">
+        <a-box id='boton1' class="clickable" value="Texto Superior" color="black"  position="0 0.05 0.01" width="0.6" grabbable obb-collider></a-box>
+        <a-box id='boton2' class="clickable" value="Texto Inferior" color="black" position="0 -0.05 0.01" width="0.6" clickable obb-collider></a-box> 
     </a-entity>
-    <a-entity id="rightHand" hand-tracking-grab-controls="hand: right;">
+    <a-entity id="rightHand" hand-tracking-grab-controls="hand: right;" obb-collider>
       
     </a-entity>
     
@@ -39,13 +39,11 @@
     </a-entity>
 
     
-    <a-box  id='cajita' position="0 1.5 -1" color="black" ></a-box>
-
-    <!-- <a-entity id="menu"  a-follow="leftHand" position="0 0.05 0.08" rotation="-85 0 0" normal-scale="0.2 0.2 0.2"></a-entity> --> 
+    <a-box grabbable ammo-body="type: dynamic; emitCollisionEvents: true" ammo-shape="type: box" 
+      id='cajita' position="0 1.5 -1" color="black" >
+    </a-box>
+ 
   <script src="./js/room.js"></script> <!--Ajustar tamaño-->
-  <script src="./js/interaction-hands.js"></script>
-  <!--<script src="./js/prueba.js"></script> -->
-  <!-- <script src="./javascript/" -->
   <script>document.getElementById('camara').setAttribute('position', '2 2 -2');</script><!--Movimiento de la camara no borrar-->
 
 </body>

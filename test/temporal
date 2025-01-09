@@ -1,0 +1,73 @@
+<script src="./js/colision_handler_v2.js"></script>
+AFRAME.registerComponent('collision-handler', {
+    init: function () {
+        var el = this.el;//El es el objeto al que le pones la funcion 
+       
+        el.addEventListener('collidestart', function (e) { // Listener para el inicio de la colisión
+        if (e.detail.targetEl.id=='rightHand'){
+            let newSquare = document.createElement('a-box');//Creamos cuadrado
+            let camera = document.querySelector('#camara');
+            let cameraPosition = camera.getAttribute('position');
+            let cameraRotation = camera.getAttribute('rotation');
+            let radY = THREE.Math.degToRad(cameraRotation.y);
+            let offsetX = -Math.sin(radY) * 2;//2 metros para adelante
+            let offsetZ = -Math.cos(radY) * 2;
+            let newSquarePosition = {
+                x: cameraPosition.x + offsetX,
+                y: cameraPosition.y, // Mantener altura de la cámara
+                z: cameraPosition.z + offsetZ
+              };
+            let freePosition=findFreePosition(newSquarePosition)
+            if (freePosition){
+                newSquare.setAttribute('color', 'purple');
+                newSquare.setAttribute('width', '5');
+                newSquare.setAttribute('height', '5');
+                newSquare.setAttribute('depth', '5');
+                document.querySelector('a-scene').appendChild(newSquare);//spawnear cuadrado
+            }
+        }
+        console.log(el.id + ' ha colisionado con ' + e.detail.targetEl.id);//la variable e es el objeto que se choca no el que la recibe
+        });
+    },
+    // Función para verificar si una posición ya está ocupada
+    checkIfPositionOccupied: function(position) {
+        let threshold = 1; // Margen de error para considerar una colisión (ajustable)
+        let sceneObjects = document.querySelectorAll('a-box'); // Asumiendo que estamos buscando cubos
+  
+        for (let i = 0; i < sceneObjects.length; i++) {
+          let objectPosition = sceneObjects[i].getAttribute('position');
+          if (Math.abs(objectPosition.x - position.x) < threshold &&
+              Math.abs(objectPosition.y - position.y) < threshold &&
+              Math.abs(objectPosition.z - position.z) < threshold) {
+            return true; 
+          }
+        }
+        return false; 
+    },
+
+    findFreePosition: function(startingPosition) {
+        let maxAttempts = 5; // Número máximo de intentos para encontrar una posición
+        let attempt = 0;
+        let stepSize = 1; // Tamaño del paso al desplazar el objeto
+        let currentPosition = startingPosition;
+
+        while (attempt < maxAttempts) {
+            // Si la posición no está ocupada, devolverla
+            if (!checkIfPositionOccupied(currentPosition)) {
+            return currentPosition;
+            }
+
+            // Si está ocupada, desplazar la posición en X o Z
+            currentPosition = {
+            x: currentPosition.x + (Math.random() * stepSize * 2 - stepSize), 
+            y: currentPosition.y,
+            z: currentPosition.z + (Math.random() * stepSize * 2 - stepSize) 
+            };
+
+            attempt++;
+        }
+
+        // Si no se encontró una posición libre después de los intentos, devolver null
+        return null;
+    }                           
+});

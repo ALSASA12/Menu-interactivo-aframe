@@ -1,5 +1,27 @@
-let boton1 = document.getElementById('#boton1');
-let boton2 = document.getElementById('#boton2');
+let boton1 = document.getElementById('boton1');
+let boton2 = document.getElementById('boton2');
+function crearCaja(position) {
+  const newBox = document.createElement('a-box');
+  newBox.setAttribute('color', 'purple');
+  newBox.setAttribute('width', '0.1');
+  newBox.setAttribute('height', '0.1');
+  newBox.setAttribute('depth', '0.1');
+
+  // Posiciona la nueva caja frente a la cámara
+  newBox.setAttribute('position', {
+      x: position.x,
+      y: position.y,
+      z: position.z - 1
+  });
+
+  document.querySelector('a-scene').appendChild(newBox);
+}
+
+document.getElementById('boton1').addEventListener('click', function () {
+  const camera = document.querySelector('#camara');
+  const cameraPosition = camera.getAttribute('position');
+  crearCaja(cameraPosition);
+});
 
 boton1.addEventListener('pinchstarted', function () {
   let newSquare = document.createElement('a-box');//Creamos cuadrado
