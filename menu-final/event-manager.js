@@ -53,7 +53,7 @@ AFRAME.registerComponent('event-manager', {
       if (targetEl==this.leftArrowEl){
         var estados = Array.from(this.boxButtonEl.states);
         var estado_actual;
-
+        
         for (var i = 0; i < posible_states.length; i++) {
           if (estados.includes(posible_states[i])) {
             estado_actual = posible_states[i];
@@ -64,7 +64,6 @@ AFRAME.registerComponent('event-manager', {
         estado_actual = parseInt(estado_actual);
         estado_actual=(estado_actual - 1 + posible_states.length) % posible_states.length;
         this.boxButtonEl.addState(String(estado_actual))
-        alert("Estado actual después de cambiar con la flecha izquierda: " + estado_actual);
       }
       if (targetEl==this.rightArrowEl){
         var estados = Array.from(this.boxButtonEl.states);
@@ -80,7 +79,6 @@ AFRAME.registerComponent('event-manager', {
         estado_actual = parseInt(estado_actual);
         estado_actual=(estado_actual + 1 + posible_states.length) % posible_states.length;
         this.boxButtonEl.addState(String(estado_actual))
-        alert("Estado actual después de cambiar con la flecha izquierda: " + estado_actual);
         
       }
       

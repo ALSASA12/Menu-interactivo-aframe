@@ -1,3 +1,6 @@
+
+<script src="https://glcdn.githack.com/babiaxr/aframe-babia-components/-/raw/master/dist/aframe-babia-components.js"></script>
+
 <script src="./js/colision_handler_v2.js"></script>
 AFRAME.registerComponent('collision-handler', {
     init: function () {
