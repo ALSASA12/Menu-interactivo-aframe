@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="//aframe.io/releases/1.6.0/aframe.min.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/gh/MozillaReality/ammo.js@8bbc0ea/builds/ammo.wasm.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.js"></script>
+  <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-super-hands-component/dist/aframe-super-hands-component.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe-extras/dist/aframe-extras.min.js"></script>
+  <!-- <script src="https://unpkg.com/super-hands@^3.0.3/dist/super-hands.min.js"></script> -->
+</head>
+<body>
+  <a-scene physics="driver: ammo;gravity: 0 0 0;debug: true" interaction-hands room-resizer="altura: 3; ancho: 10; largo: 10">
+
+    <a-entity id="leftHand" hand-tracking-grab-controls="hand: left;" obb-collider>
+      <a-plane id="menu-plane" position="0 0.15 0" rotation="0 0 0" width="0.3" height="0.3" color="#7BC8A4">
+        <a-box id='boton1' class="clickable" value="Texto Superior" color="black"  position="0 0.05 0.01" width="0.6" grabbable obb-collider></a-box>
+        <a-box id='boton2' class="clickable" value="Texto Inferior" color="black" position="0 -0.05 0.01" width="0.6" clickable obb-collider></a-box> 
+    </a-entity>
+    <a-entity id="rightHand" hand-tracking-grab-controls="hand: right;" obb-collider>
+      
+    </a-entity>
+    
+    
+    <!-- Cámara -->
+    <a-entity id="camara" camera position="8 2 2"></a-entity>
+
+    <!--Paredes y techo -->
+    <a-entity id="wall1" geometry="primitive: box" material="color: #ff0000"></a-entity>
+    <a-entity id="wall2" geometry="primitive: box" material="color: #00ff00" rotation="0 180 0"></a-entity>
+    <a-entity id="wall3" geometry="primitive: box" material="color: #0000ff" rotation="0 0 0"></a-entity>
+    <a-entity id="wall4" geometry="primitive: box" material="color: #ffff00" rotation="0 0 0"></a-entity>
+    <a-entity id="roof" geometry="primitive: box" material="color: #ffffff"></a-entity>
+
+    <!-- Controlador de cámara -->
+    <a-entity id="controller" position="0 0 0" rotation="0 0 0">
+        <a-camera look-controls></a-camera>
+    </a-entity>
+
+    
+    <a-box grabbable ammo-body="type: dynamic; emitCollisionEvents: true" ammo-shape="type: box" 
+      id='cajita' position="0 1.5 -1" color="black" >
+    </a-box>
+ 
+  <script src="./js/room.js"></script> <!--Ajustar tamaño-->
+  <script>document.getElementById('camara').setAttribute('position', '2 2 -2');</script><!--Movimiento de la camara no borrar-->
+
+</body>
+</html>
+
+
