@@ -1,0 +1,38 @@
+# Blender 3.6.2 MTL File: 'Bed.blend'
+# www.blender.org
+
+newmtl BedFrame
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd BedFrame_basecolor.png
+map_Ns BedFrame_roughness.png
+map_refl BedFrame_metalness.png
+map_Bump -bm 1.000000 BedFrame_normal.png
+
+newmtl BedMattress
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd BedMattress_basecolor.png
+map_Ns BedMattress_roughness.png
+map_refl BedMattress_metalness.png
+map_Bump -bm 1.000000 BedMattress_normal.png
+
+newmtl BedPillow
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd BedPillow_basecolor.png
+map_Ns BedPillow_roughness.png
+map_refl BedPillow_metalness.png
+map_Bump -bm 1.000000 BedPillow_normal.png
