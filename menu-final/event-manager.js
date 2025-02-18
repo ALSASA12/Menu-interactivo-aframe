@@ -50,36 +50,21 @@ AFRAME.registerComponent('event-manager', {
           document.querySelector('a-scene').appendChild(newSphere); // Lo unimos a la etiqueta de la escena
         }
       }
-      if (targetEl==this.leftArrowEl){
+      const cambiarEstado = (direccion) => {
         var estados = Array.from(this.boxButtonEl.states);
-        var estado_actual;
-        
-        for (var i = 0; i < posible_states.length; i++) {
-          if (estados.includes(posible_states[i])) {
-            estado_actual = posible_states[i];
-            break;
-          }
-        }
-        this.boxButtonEl.removeState(estado_actual);
-        estado_actual = parseInt(estado_actual);
-        estado_actual=(estado_actual - 1 + posible_states.length) % posible_states.length;
-        this.boxButtonEl.addState(String(estado_actual))
-      }
-      if (targetEl==this.rightArrowEl){
-        var estados = Array.from(this.boxButtonEl.states);
-        var estado_actual;
+        var estado_actual = posible_states.find(state => estados.includes(state)) || posible_states[0];
 
-        for (var i = 0; i < posible_states.length; i++) {
-          if (estados.includes(posible_states[i])) {
-            estado_actual = posible_states[i];
-            break;
-          }
-        }
         this.boxButtonEl.removeState(estado_actual);
-        estado_actual = parseInt(estado_actual);
-        estado_actual=(estado_actual + 1 + posible_states.length) % posible_states.length;
-        this.boxButtonEl.addState(String(estado_actual))
-        
+
+        let nuevo_estado = (parseInt(estado_actual) + direccion + posible_states.length) % posible_states.length;
+        this.boxButtonEl.addState(String(nuevo_estado));
+      };
+
+      if (targetEl === this.leftArrowEl) {
+        cambiarEstado(-1);
+      }
+      if (targetEl === this.rightArrowEl) {
+        cambiarEstado(1);
       }
       
   }

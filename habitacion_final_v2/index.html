@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/MozillaReality/ammo.js@8bbc0ea/builds/ammo.wasm.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.js"></script>
+  <script src="https://glcdn.githack.com/babiaxr/aframe-babia-components/-/raw/master/dist/aframe-babia-components.js"></script>
+</head>
+<body>
+  <a-scene physics="driver: ammo; gravity: 0 0 -9.8; debug: true">
+    <a-entity id="leftHand" hand-tracking-grab-controls="hand: left;"></a-entity>
+    <a-entity id="rightHand" hand-tracking-grab-controls="hand: right;"></a-entity>
+    <!-- Generar la habitación automáticamente -->
+    <a-entity room-resizer="altura: 5; ancho: 12; largo: 12"></a-entity>
+    <!-- Controlador de cámara -->
+    <a-entity id="controller" position="0 1.6 0" rotation="0 0 0">
+        <a-camera wasd-controls look-controls></a-camera>
+    </a-entity>
+
+    <a-entity id="menu" menu position="0 1.5 -0.4" rotation="-45 0 0" event-manager grabbable>
+      <!-- Label del menú -->
+      <a-entity text="value: 'Mobiliario'; color: white; align: center; width: 1" position="0 0.15 0"></a-entity>
+      <!-- Botones -->
+      <a-entity id="boxButton1" button="label: Spawn box " position="-0.1 0 0" color="red"></a-entity>
+      <a-entity id="boxButton2" button="label: Spawn sphere " position="0.1 0 0" color="red"></a-entity>
+      <a-entity id="boxButton3" button="label: Spawn bed " position="-0.1 -0.1 0" color="red"></a-entity>
+      <a-entity id="boxButton4" button="label: Spawn - " position="0.1 -0.1 0" color="red"></a-entity>
+      <!-- Flechas de navegación -->
+      <a-entity id="leftArrow" button="label: Left ;height: 0.35 ; width: 0.05 ;depth:0.004"  position="-0.25 0 0" color="black"></a-entity>
+      <a-entity id="rightArrow" button="label: Right ;height: 0.35 ; width: 0.05 ;depth:0.004"  position="0.25 0 0" color="black"></a-entity>
+    </a-entity>
+</body>
+<script src="./js/room.js"></script>
+<script src="./js/menu.js"></script>
+<script src="./js/button.js"></script>
+<script src="./js/pinchable.js"></script>
+<script src="./js/event-manager.js"></script>
+</html>
