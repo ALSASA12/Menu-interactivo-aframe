@@ -36,25 +36,29 @@ AFRAME.registerComponent('event-manager', {
     this.boxButton3El.addState(String(1));
     this.boxButton4El.addState(String(1));
   },
-  
+
+  //Funcion que se encarga de realizar el evento
   onPinch: function (evt) {
     var targetEl = evt.target;
     //Botones acciones
     if (targetEl === this.boxButton1El) {//Boton 1
       if (targetEl.is('1')) {
         this.spawnBox();
+
       } else if (targetEl.is('2')) {
           // Acción para boxButton1El en estado 2 (Cambio de ancho +)
       }
     } else if (targetEl === this.boxButton2El) { //Boton 2
       if (targetEl.is('1')) {
           this.spawnSphere()
+
       } else if (targetEl.is('2')) {
           // Acción para boxButton2El en estado 2 (Cambio de largo +)
       }
     } else if (targetEl === this.boxButton3El) {//Boton 3
       if (targetEl.is('1')) {
         this.spawnBed()
+
       } else if (targetEl.is('2')) {
           // Acción para boxButton3El en estado 2 (Cambio de ancho -)
       }
@@ -64,12 +68,17 @@ AFRAME.registerComponent('event-manager', {
       } else if (targetEl.is('2')) {
           // Acción para boxButton4El en estado 2 (Cambio de largo +)
       }
-    } else if (targetEl==this.leftArrowEl) { //Flecha izquierda
-      this.cambiarEstado("left");
-    } else if (targetEl==this.rightArrowEl) { //Flecha derecha
-      this.cambiarEstado("right");    
+    }
+
+    //Control de la flechas
+    if (targetEl === this.leftArrowEl) {
+      cambiarEstado(-1);
+    }
+    if (targetEl === this.rightArrowEl) {
+      cambiarEstado(1);
     }
   },
+  //Funciones para spawnear distintos objetos
   spawnBox: function () {
     let newSquare = document.createElement('a-box');
     let scene = document.querySelector('a-scene');
@@ -79,6 +88,7 @@ AFRAME.registerComponent('event-manager', {
     newSquare.setAttribute('width', '1');
     newSquare.setAttribute('height', '1');
     newSquare.setAttribute('depth', '1');
+    newSquare.setAttribute('delete_on_trash_collision', '');
     scene.appendChild(newSquare); 
   },
 
@@ -89,6 +99,7 @@ AFRAME.registerComponent('event-manager', {
     newSphere.setAttribute('position', '-1 0 -2');
     newSphere.setAttribute('color', 'purple');
     newSphere.setAttribute('radius', '1');
+    newSphere.setAttribute('delete_on_trash_collision', '');
     scene.appendChild(newSphere); 
   },
   spawnBed: function(){
@@ -118,33 +129,40 @@ AFRAME.registerComponent('event-manager', {
     entity.setAttribute('position', '0 0 -3');
     entity.setAttribute('scale', '1.5 1.5 1.5');
     entity.setAttribute('rotation', '0 0 0');
-
+    entity.setAttribute('delete_on_trash_collision', '');
     scene.appendChild(entity);
   },
+
+  //Funcion para el cambio de estado con las flechas de direccion
   cambiarEstado: function (direccion) {
-    var estados = Array.from(this.boxButton1El.states);
-    var estado_actual;
     var posible_states = ['1', '2'];
-    
-    for (var i = 0; i < posible_states.length; i++) {
-        if (estados.includes(posible_states[i])) {
-            estado_actual = posible_states[i];
-            break;
-        }
-    }
+    var estados = Array.from(this.boxButton1El.states);
+    var estado_actual = posible_states.find(state => estados.includes(state)) || posible_states[0];
 
+    //Eliminacion de estados
     this.boxButton1El.removeState(estado_actual);
-    estado_actual = parseInt(estado_actual);
+    this.boxButton2El.removeState(estado_actual);
+    this.boxButton3El.removeState(estado_actual);
+    this.boxButton4El.removeState(estado_actual);
 
-    if (direccion === "left") {
-        estado_actual = (estado_actual - 1 + posible_states.length) % posible_states.length;
-    } else if (direccion === "right") {
-        estado_actual = (estado_actual + 1 + posible_states.length) % posible_states.length;
+    let nuevo_estado = String((parseInt(estado_actual) - 1 + direccion + posible_states.length) % posible_states.length + 1);
+
+    //Añadir nuevos estados
+    this.boxButton1El.addState(nuevo_estado);
+    this.boxButton2El.addState(nuevo_estado);
+    this.boxButton3El.addState(nuevo_estado);
+    this.boxButton4El.addState(nuevo_estado);
+
+    //Cambiar valor del label de texto 
+    cambiarTextoMenu(nuevo_estado)
+  },
+  cambiarTextoMenu:function(nuevo_estado){
+    let menu = document.querySelector('#menuLabel');
+    if (nuevo_estado == '1'){
+      label.setAttribute('text', 'value: Menu 1');
+    } else if (nuevo_estado=='2'){
+      label.setAttribute('text', 'value: Menu 2');
     }
+  }
 
-    this.boxButton1El.addState(String(estado_actual));
-    this.boxButton2El.addState(String(estado_actual));
-    this.boxButton3El.addState(String(estado_actual));
-    this.boxButton4El.addState(String(estado_actual));
-}
 });

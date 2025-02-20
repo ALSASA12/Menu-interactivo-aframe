@@ -1,4 +1,3 @@
-/* global AFRAME */
 AFRAME.registerComponent('event-manager', {
 
   init: function () {
@@ -56,8 +55,9 @@ AFRAME.registerComponent('event-manager', {
 
         this.boxButtonEl.removeState(estado_actual);
 
-        let nuevo_estado = (parseInt(estado_actual) + direccion + posible_states.length) % posible_states.length;
-        this.boxButtonEl.addState(String(nuevo_estado));
+        let nuevo_estado = String((parseInt(estado_actual) - 1 + direccion + posible_states.length) % posible_states.length + 1);
+        
+        this.boxButtonEl.addState(nuevo_estado);
       };
 
       if (targetEl === this.leftArrowEl) {
