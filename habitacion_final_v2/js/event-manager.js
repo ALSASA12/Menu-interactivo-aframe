@@ -159,9 +159,9 @@ AFRAME.registerComponent('event-manager', {
   cambiarTextoMenu:function(nuevo_estado){
     let menu = document.querySelector('#menuLabel');
     if (nuevo_estado == '1'){
-      label.setAttribute('text', 'value: Menu 1');
+      menu.setAttribute('text', 'value' , 'Menu 1');
     } else if (nuevo_estado=='2'){
-      label.setAttribute('text', 'value: Menu 2');
+      menu.setAttribute('text', 'value' , 'Menu 2');
     }
   }
 
