@@ -38,7 +38,7 @@ AFRAME.registerComponent('event-manager', {
   },
 
   //Funcion que se encarga de realizar el evento
-  onPinch: function (evt) {
+  onPinch:async function (evt) {
     var targetEl = evt.target;
     //Botones acciones
     if (targetEl === this.boxButton1El) {//Boton 1
@@ -64,20 +64,25 @@ AFRAME.registerComponent('event-manager', {
       }
     } else if (targetEl === this.boxButton4El) {//Boton 4
       if (targetEl.is('1')) {
-          // Rellenar con alguna 
+        this.spawnCylinder()
       } else if (targetEl.is('2')) {
-          // Acción para boxButton4El en estado 2 (Cambio de largo +)
+        this.spawnCone()  
+        // Acción para boxButton4El en estado 2 (Cambio de largo +)
       }
+    } else if (targetEl === this.leftArrowEl) {
+      this.cambiarEstado(-1);
+    } else if (targetEl === this.rightArrowEl) {
+      this.cambiarEstado(1);
+    }
+    // Pausar la ejecución por 1 segundo
+    await sleep(1000);
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    //Control de la flechas
-    if (targetEl === this.leftArrowEl) {
-      cambiarEstado(-1);
-    }
-    if (targetEl === this.rightArrowEl) {
-      cambiarEstado(1);
-    }
   },
+  
   //Funciones para spawnear distintos objetos
   spawnBox: function () {
     let newSquare = document.createElement('a-box');
@@ -91,6 +96,30 @@ AFRAME.registerComponent('event-manager', {
     newSquare.setAttribute('delete_on_trash_collision', '');
     scene.appendChild(newSquare); 
   },
+  spawnCylinder: function () {
+    let newCylinder = document.createElement('a-cylinder'); 
+    let scene = document.querySelector('a-scene');
+
+    newCylinder.setAttribute('position', '0 0 -2.5');
+    newCylinder.setAttribute('color', 'blue');
+    newCylinder.setAttribute('radius', '0.5');
+    newCylinder.setAttribute('height', '2');
+    newCylinder.setAttribute('delete_on_trash_collision', '');
+    
+    scene.appendChild(newCylinder); 
+  },
+  spawnCone: function () {
+    let newCone = document.createElement('a-cone'); 
+    let scene = document.querySelector('a-scene');
+
+    newCone.setAttribute('position', '0 0 -1');
+    newCone.setAttribute('color', 'orange');
+    newCone.setAttribute('radius-bottom', '1');  // Base del cono
+    newCone.setAttribute('height', '2');         // Altura del cono
+    newCone.setAttribute('delete_on_trash_collision', '');
+    
+    scene.appendChild(newCone); 
+},
 
   spawnSphere: function () {
     let newSphere = document.createElement('a-sphere'); 
@@ -154,15 +183,16 @@ AFRAME.registerComponent('event-manager', {
     this.boxButton4El.addState(nuevo_estado);
 
     //Cambiar valor del label de texto 
-    cambiarTextoMenu(nuevo_estado)
+    this.cambiarTextoMenu(nuevo_estado)
   },
-  cambiarTextoMenu:function(nuevo_estado){
+  cambiarTextoMenu: function(nuevo_estado) {
     let menu = document.querySelector('#menuLabel');
-    if (nuevo_estado == '1'){
-      menu.setAttribute('text', 'value' , 'Menu 1');
-    } else if (nuevo_estado=='2'){
-      menu.setAttribute('text', 'value' , 'Menu 2');
-    }
+    let textAttributes = menu.getAttribute('text') || {}; // Obtener los atributos actuales
+
+    // Modificar solo el valor sin eliminar los otros atributos
+    textAttributes.value = (nuevo_estado === '1') ? 'Menu 1' : 'Menu 2';
+
+    menu.setAttribute('text', textAttributes); // Aplicar cambios
   }
 
 });
