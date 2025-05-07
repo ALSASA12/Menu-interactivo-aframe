@@ -1,0 +1,7 @@
+[
+    { "id": "boxButton1" , "label": "Boton 1"},
+    { "id":"boxButton2" , "label": "Boton 2" },
+    { "id":"boxButton3" , "label": "Boton 3" },
+    { "id":"boxButton4" , "label": "Boton 4" }
+]
+  

@@ -1,0 +1,9 @@
+[
+    { "id": "Boton 1" ,"evento": ["click","grabbable"] , "width": 0.05},
+    { "id":"Boton 2" , "label": "Boton 2" },
+    { "label": "Boton 3","color":"#000000" },
+    { "id":"Boton 2" , "label": "Boton 2" },
+    { "id":"Boton 2" , "label": "Boton 2" },
+    { "id":"Boton 2" , "label": "Boton 2" }
+]
+  
