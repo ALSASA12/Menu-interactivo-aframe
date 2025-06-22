@@ -1,10 +1,20 @@
-# Design Room
+# 🎨 Design Room - Menú 3D Personalizable para A-Frame
 
-**Design Room** es un menú personalizable para entornos en **A-Frame**, ideal para proyectos de realidad virtual o entornos 3D. El menú se genera automáticamente a partir de un archivo `menu_data.json`, permitiendo definir submenús, botones, acciones e imágenes sin modificar el código fuente.
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/674727/32120889-230ef110-bb0f-11e7-908c-76e39aa43149.jpg" width="400" alt="A-Frame compatible">
+</p>
+
+<p align="center"><b>Genera menús dinámicos y personalizables para entornos A-Frame desde un archivo JSON.</b></p>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/design-room"><img src="https://img.shields.io/npm/v/design-room.svg?style=flat-square" alt="Versión NPM"></a>
+  <a href="https://www.npmjs.com/package/design-room"><img src="https://img.shields.io/npm/dt/design-room.svg?style=flat-square" alt="Descargas"></a>
+  <a href="https://github.com/ALSASA12/design-room"><img src="https://img.shields.io/github/license/ALSASA12/design-room.svg?style=flat-square" alt="Licencia"></a>
+</p>
 
 ---
 
-## Instalación
+## 🚀 Instalación
 
 Instala la librería mediante npm:
 
@@ -12,7 +22,7 @@ Instala la librería mediante npm:
 npm install design-room
 ```
 
-O si prefieres usar el script directamente en el HTML:
+O inclúyelo directamente en el navegador:
 
 ```html
 <script src="./ruta/a/design-room/index.js"></script>
@@ -20,11 +30,13 @@ O si prefieres usar el script directamente en el HTML:
 
 ---
 
-## Uso
+## 🛠️ Uso Básico
 
-1. Coloca un archivo `menu_data.json` en el mismo directorio que tu archivo `.html`.
+1️⃣ Crea un archivo `menu_data.json` en el mismo directorio que tu archivo `.html`.  
+2️⃣ Define tus menús de manera jerárquica.  
+3️⃣ La librería generará el menú automáticamente al cargar la escena.
 
-**Ejemplo de estructura de `menu_data.json`:**
+**Ejemplo mínimo de `menu_data.json`:**
 
 ```json
 [
@@ -48,30 +60,7 @@ O si prefieres usar el script directamente en el HTML:
 ]
 ```
 
-### Explicación de los componentes del JSON
-
-Cada menú o submenú se define como un objeto dentro del array principal:
-
-- **menuId**: Identificador único del menú. Debe ser único y se utiliza para vincular submenús.
-- **menuLabel**: Texto que aparecerá como título del menú.
-- **activo**: Indica si este menú es el que se muestra inicialmente (`true`) o no (`false`). Solo un menú debe tener `activo: true`.
-- **submenuDe**: Si es un submenú, aquí se coloca el `menuId` del menú padre. Si es un menú principal, debe ser `null`.
-- **menuSiguiente**: `menuId` del siguiente submenú en la secuencia (para navegación cíclica o por botones "siguiente"). Puede ser `null` si no aplica.
-- **menuAnterior**: `menuId` del submenú anterior en la secuencia. Puede ser `null` si no aplica.
-- **botones**: Array de objetos que define los botones dentro del menú.
-
-Cada botón tiene los siguientes campos:
-
-- **id**: Identificador único del botón.
-- **label**: Texto que aparecerá en el botón.
-- **accion**: Acción o evento que se dispara al pulsar el botón. Si no tiene acción y abre un submenú, puede ser `null`.
-- **img**: Ruta a la imagen que se mostrará en el botón.
-- **abreSubmenu**: Si el botón abre otro submenú, aquí se indica el `menuId` correspondiente. Si no abre submenú, debe ser `null`.
-
----
-
-
-2. En tu archivo `.html` importa la librería y A-Frame:
+**Ejemplo de uso en HTML:**
 
 ```html
 <html>
@@ -81,32 +70,59 @@ Cada botón tiene los siguientes campos:
   </head>
   <body>
     <a-scene>
-      <!-- Tu entorno 3D -->
+      <!-- Aquí se mostrará el menú generado -->
     </a-scene>
   </body>
 </html>
 ```
 
-La librería leerá automáticamente el archivo `menu_data.json` y generará el menú en tu escena.
+---
+
+## 📁 Estructura del JSON - Explicación Completa
+
+Cada menú o submenú se define como un objeto dentro del array principal:
+
+| Campo           | Descripción                                                                               |
+|-----------------|-------------------------------------------------------------------------------------------|
+| `menuId`       | Identificador único del menú. Utilizado para vincular submenús.                          |
+| `menuLabel`    | Texto que aparece como título visible del menú.                                          |
+| `activo`       | Si es `true`, este menú se muestra al inicio. Solo uno debe tener `activo: true`.        |
+| `submenuDe`    | Si es un submenú, indica el `menuId` del menú padre. Si es principal, se deja en `null`.|
+| `menuSiguiente`| `menuId` del siguiente menú en la secuencia. Puede ser `null`.                           |
+| `menuAnterior` | `menuId` del menú anterior. Puede ser `null`.                                            |
+| `botones`      | Array de botones que componen el menú. Cada uno puede tener acción o abrir un submenú.   |
+
+**Dentro de cada botón:**
+
+| Campo          | Descripción                                                                  |
+|----------------|------------------------------------------------------------------------------|
+| `id`           | Identificador único del botón.                                               |
+| `label`        | Texto visible en el botón.                                                   |
+| `accion`       | Acción que se ejecuta al pulsar el botón. Puede ser `null` si abre submenú. |
+| `img`          | Ruta de la imagen que aparece en el botón.                                   |
+| `abreSubmenu`  | Si abre un submenú, indica el `menuId` correspondiente. `null` si no aplica.|
 
 ---
 
-## Características
+## ✨ Características
 
 ✅ Generación automática de menús en A-Frame  
-✅ Soporte para submenús encadenados  
-✅ Configuración de imágenes, etiquetas y acciones por botón  
-✅ Navegación entre menús (siguiente/anterior)  
-✅ Personalización mediante JSON sin tocar el código  
+✅ Soporte para submenús encadenados y navegación cíclica  
+✅ Imágenes personalizadas en los botones  
+✅ Configuración 100% mediante JSON  
+✅ Compatible con proyectos de realidad virtual y 3D en navegador  
 
 ---
 
-## Contribuir
+## 🤝 Contribuciones
 
-¿Quieres mejorar el proyecto? ¡Pull requests y sugerencias son bienvenidas! Solo asegúrate de que el código sea limpio y funcional.
+¿Quieres mejorar el proyecto? ¡Pull requests y sugerencias son bienvenidas!  
+Puedes abrir un `Issue` o proponer mejoras directamente.
 
 ---
 
-## Licencia
+## 📄 Licencia
 
-Este proyecto está bajo la licencia ISC.
+Este proyecto está distribuido bajo licencia **ISC**.
+
+---
