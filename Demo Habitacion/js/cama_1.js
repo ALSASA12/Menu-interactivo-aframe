@@ -41,7 +41,7 @@ AFRAME.registerComponent('cama_1', {
         entity.setAttribute('position', '1 1 1');
         entity.setAttribute('scale', '1.5 1.5 1.5');
         entity.setAttribute('rotation', '0 0 0');
-        entity.setAttribute('delete_on_trash_collision', '');
+        entity.setAttribute('grabbable', '');
         scene.appendChild(entity);
     },
 });

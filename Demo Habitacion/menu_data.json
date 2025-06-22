@@ -2,7 +2,7 @@
   {
     "menuId": "menuPrincipal",
     "menuLabel":"Menu inicial",
-    "activo": true,
+    "activo": false,
     "submenuDe": null,
     "menuSiguiente": null,
     "menuAnterior": null,
@@ -95,7 +95,7 @@
   {
     "menuId": "submenu2-3",
     "menuLabel":"Muebles mix",
-    "activo": false,
+    "activo": true,
     "submenuDe": "menuPrincipal",
     "menuSiguiente": "submenu2-4",
     "menuAnterior": "submenu2-2",
