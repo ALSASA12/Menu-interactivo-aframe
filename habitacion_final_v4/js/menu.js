@@ -1,15 +1,18 @@
 /* global AFRAME */
 AFRAME.registerComponent('menu', {
   schema: {
-    button_id: {default: 'boton'},
-    button_label: {default: 'label'},
-    button_width: {default: 0.11},
-    button_height: {default: 0.05},
-    button_depth: {default:0.04},
-    button_color: {default:'#3a50c5'},
+    //button_radius_bottom: {default: 0.4},
+    button_height: {default: 0.025},
+    //button_radius_top: {default:0.04},
+    
     menu_width :{default: 0.6},
     menu_heigth:{default: 0.40},
-    menu_depth: {default: 0.01}
+    //menu_depth: {default: 0.01},
+    button_color:        { default: '#3B82F6' }, // azul profesional (como botones de sistemas modernos)
+    button_label_color:  { default: '#FFFFFF' }, // blanco para alto contraste
+    menu_color:          { default: '#374151' }, // gris oscuro azulado (fondo elegante y neutro)
+    menu_label_color:    { default: '#93C5FD' }, // azul claro suave (lectura agradable)
+    arrow_color:         { default: '#F59E0B' }, // naranja intenso (para navegación o destacar 
   },
 
   init: function () {
@@ -17,24 +20,38 @@ AFRAME.registerComponent('menu', {
     this.Process_menu(); 
     this.AppendArrows();
   },
+  
   CreateMenu: function () {
     let scene = this.el.sceneEl; 
-    var menuBackGroundEl = document.createElement('a-entity');
-    menuBackGroundEl.setAttribute('geometry', {
-      primitive: 'box',
+    var menuFront = document.createElement('a-entity');
+    var menuCollision = document.createElement('a-entity');
+
+    menuFront.setAttribute('rounded-plane', {
       width: this.data.menu_width,
       height: this.data.menu_heigth,
-      depth: this.data.menu_depth
+      radius: 0.05
     });
-    menuBackGroundEl.setAttribute('material', {
-      color: 'gray'
+    menuFront.setAttribute('material', {
+      color:  this.data.menu_color,
+      metalness:"0.3",
+      roughness:"0.3"
     });
-    menuBackGroundEl.setAttribute('position', '0 1.5 -0.4');
-    menuBackGroundEl.setAttribute('rotation', '-45 0 0');
-    menuBackGroundEl.setAttribute('id', 'menu');
-    menuBackGroundEl.setAttribute('grabbable', '');
-
-    scene.appendChild(menuBackGroundEl);
+    menuCollision.setAttribute('geometry', {
+      primitive: 'box',
+      depth: "0.01",
+      width: this.data.menu_width,
+      height: this.data.menu_heigth,
+    });
+    menuCollision.setAttribute('material', {
+      opacity: 0,
+      transparent: true
+    });
+    menuCollision.setAttribute('position', '0 1.5 -0.4');
+    menuCollision.setAttribute('rotation', '-45 0 0');
+    menuCollision.setAttribute('id', 'menu');
+    menuCollision.setAttribute('grabbable', '');
+    menuCollision.appendChild(menuFront);
+    scene.appendChild(menuCollision);
   },
 
   AppendArrows: function () {
@@ -45,11 +62,11 @@ AFRAME.registerComponent('menu', {
     }
   
     const arrowWidth = 0.05;
-    const arrowHeight = this.data.menu_heigth - 0.1;
-    const arrowDepth = 0.04;
+    const arrowHeight = 0.1;
+    const arrowDepth = 0.001;
     const arrowXOffset = (this.data.menu_width / 2) - (arrowWidth / 2) - 0.02;
-  
-    const createArrow = (id, color, xPosition) => {
+    const arrowYOffset =(this.data.menu_heigth / 2) - 0.07
+    const createArrow = (id, color,img, xPosition,yPosition) => {
       const arrow = document.createElement('a-entity');
       arrow.setAttribute('geometry', {
         primitive: 'box',
@@ -57,17 +74,22 @@ AFRAME.registerComponent('menu', {
         height: arrowHeight,
         depth: arrowDepth
       });
-      arrow.setAttribute('material', { color });
-      arrow.setAttribute('position', `${xPosition} 0 0`);
+      arrow.setAttribute('material', { 
+        color: color ,
+        src:img,
+        transparent: true,
+        opacity: 1,
+        color: '#ffffff'
+      });
+      arrow.setAttribute('position', `${xPosition} ${yPosition} 0.01`);
       arrow.setAttribute('id', id);
-      arrow.setAttribute('pinchable', '');
+      arrow.setAttribute('pressable', '');
       arrow.setAttribute('arrow', '')
       return arrow;
     };
   
-    this.LeftArrow = createArrow('leftArrow', 'red', -arrowXOffset);
-    this.RightArrow = createArrow('rightArrow', 'blue', arrowXOffset);
-  
+    this.LeftArrow = createArrow('leftArrow',  this.data.arrow_color,'./assets/flecha_izquierda.png', -arrowXOffset,arrowYOffset);
+    this.RightArrow = createArrow('rightArrow',  this.data.arrow_color,'./assets/flecha_derecha.png', arrowXOffset,arrowYOffset);
     menuEl.appendChild(this.LeftArrow);
     menuEl.appendChild(this.RightArrow);
   },
@@ -76,16 +98,21 @@ AFRAME.registerComponent('menu', {
   AppendButtons: function(boton,menuId,activo,menuSiguiente,menuAnterior){
     var buttonEl = this.buttonEl= document.createElement('a-entity');
     var menuEl = document.querySelector('#menu');
-    buttonEl.setAttribute('id', boton.id || this.data.button_id);
+
+    buttonEl.setAttribute('id', boton.id );
     buttonEl.setAttribute('geometry', {
-      primitive: 'box',
-      width: boton.width || this.data.button_width,
+      primitive: 'cylinder',
+      radius:'0.05',
       height: boton.height|| this.data.button_height,
-      depth: boton.depth || this.data.button_depth
     });
-    buttonEl.setAttribute('material', {
-      color: boton.color || this.data.button_color
-    });
+    buttonEl.setAttribute('material',{
+      color: this.data.button_color,
+      src: boton.img,
+      transparent: true,
+      opacity: 1,
+      color: '#ffffff'
+    })
+    buttonEl.setAttribute('rotation','90 0 0')
     //Menu al que pertenece , menu en actividad y movimiento entre menus
     buttonEl.setAttribute('menu-tag',menuId);
     buttonEl.setAttribute('activo',activo);
@@ -93,24 +120,24 @@ AFRAME.registerComponent('menu', {
     buttonEl.setAttribute('menu-anterior',menuAnterior);
     //Añadimos la accion o el submenu
     if (boton.abreSubmenu && boton.abreSubmenu.trim() !== "") {
-      console.log("Botón:", boton.id, "Submenu:", boton.abreSubmenu);
       buttonEl.setAttribute('sub-menu', '');
       buttonEl.setAttribute('submenu-id',boton.abreSubmenu);
     } else {
       buttonEl.setAttribute(boton.accion,'')
     };
     buttonEl.setAttribute('position', '-1000 -1000 -1000');
-    buttonEl.setAttribute('pinchable','')
+    buttonEl.setAttribute('pressable','')
 
     // Crear una etiqueta de texto para cada botón
     var labelEl = this.labelEl= document.createElement('a-entity');
-    labelEl.setAttribute('position', '0 0 0.02');
+    labelEl.setAttribute('position', '0 0.01 0.07');
     labelEl.setAttribute('text', {
-      value: boton.label || this.data.button_label,
-      color: 'white',
+      value: boton.label ,
+      color:  this.data.button_label_color,
       align: 'center'
     });
-    labelEl.setAttribute('scale', '0.75 0.75 0.75');
+    labelEl.setAttribute('scale', '0.6 0.6 0.6');
+    labelEl.setAttribute('rotation','-90 0 0')
     buttonEl.appendChild(labelEl);
     menuEl.appendChild(buttonEl);
 
@@ -119,24 +146,39 @@ AFRAME.registerComponent('menu', {
     var menuEL =document.querySelector('#menu');
     var labelEl = this.labelEl= document.createElement('a-entity');
     labelEl.setAttribute('position', `-1000 -1000 -1000`);
-    labelEl.setAttribute('text', {
-      value: menu_label,
-      color: 'white',
-      align: 'center'
+    labelEl.setAttribute('scale','0.18 0.18 0.18')
+    labelEl.setAttribute('geometry', {
+      primitive: 'plane',
+      width: menu_label.length * 0.018 + 0.02,
+      height: 0.05,
+      depth: 0.01
     });
-    labelEl.setAttribute('scale', '0.75 0.75 0.75');
+    labelEl.setAttribute('material', {
+      transparent: true,
+      opacity: 0.0
+    });
     labelEl.setAttribute('id', menuId);
     labelEl.setAttribute('menu-tag',menuId);
     labelEl.setAttribute('sub-menu','');
-    labelEl.setAttribute('subMenuId',submenuDe);
+    labelEl.setAttribute('subMenu-Id',submenuDe);
+    labelEl.setAttribute('label','')
+    labelEl.setAttribute('pressable','')
+    // Crear subentidad de texto visible
+    const textEl = document.createElement('a-text');
+    textEl.setAttribute('value', menu_label);
+    textEl.setAttribute('color',  this.data.menu_label_color);
+    textEl.setAttribute('align', 'center');
+    textEl.setAttribute('font', 'dejavu');
+    textEl.setAttribute('position', '0 0 0.06');
+    labelEl.appendChild(textEl)
     menuEL.appendChild(labelEl);
   },
   ubicar_menu: function(menuId,visible){
     const posiciones = {
       1: [ [0, 0, 0] ],
       2: [ [-0.1, 0, 0], [0.1, 0, 0] ],
-      3: [ [-0.1, 0.05, 0], [0.1, 0.05, 0], [0, -0.5, 0] ],
-      4: [ [-0.1, 0.05, 0], [0.1, 0.05, 0], [-0.1, -0.05, 0], [0.1, -0.05, 0] ]
+      3: [ [-0.1, 0.05, 0], [0.1, 0.05, 0], [0, -0.1, 0] ],
+      4: [ [-0.1, 0.05, 0], [0.1, 0.05, 0], [-0.1, -0.1, 0], [0.1, -0.1, 0] ]
     };
     let menuEl = document.querySelector('#menu');
     let elementosConMenuTag  = menuEl.querySelectorAll('[menu-tag]');
@@ -147,7 +189,7 @@ AFRAME.registerComponent('menu', {
 
     // Detectar cuál es la label y cuáles son los botones
     entidades.forEach(el => {
-    if (el.hasAttribute('text')) {
+    if (el.hasAttribute('label')) {
       label = el;
     } else {
       botones.push(el);
@@ -184,7 +226,7 @@ AFRAME.registerComponent('menu', {
     if (!menuEl) {
       alert('Error en el menu no cargo');
     }
-    fetch('./js/menu_data.json')  // Se debe de poner la ruta desde index.html no la ruta desde este archivo
+    fetch('./menu_data.json')  // Se debe de poner la ruta desde index.html no la ruta desde este archivo
       .then(response => response.json())
       .then(data => {
         data.forEach((item) => {

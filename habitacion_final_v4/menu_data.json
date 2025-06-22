@@ -1,0 +1,98 @@
+[
+  {
+    "menuId": "menuPrincipal",
+    "menuLabel":"Menu inicial",
+    "activo": true,
+    "submenuDe": null,
+    "menuSiguiente": null,
+    "menuAnterior": null,
+    "botones": [
+      {
+        "id": "boton1",
+        "label": "Boton 1",
+        "accion": "generico",
+        "img":"./assets/cama_generica.png",
+        "abreSubmenu": null
+      },
+      {
+        "id": "boton2",
+        "label": "submenu2-1",
+        "accion": null,
+        "img":"./assets/cama_generica.png",
+        "abreSubmenu": "submenu2-1"
+      },
+      {
+        "id": "boton3",
+        "label": "Boton 3",
+        "accion": "esfera",
+        "img":"./assets/cama_generica.png",
+        "abreSubmenu": null
+      },
+      {
+        "id": "boton4",
+        "label": "Sillas",
+        "accion": null,
+        "img":"./assets/silla_generica.png",
+        "abreSubmenu": "submenu2-2"
+      }
+    ]
+  },
+  {
+    "menuId": "submenu2-1",
+    "menuLabel":"Camas",
+    "activo": false,
+    "submenuDe": "menuPrincipal",
+    "menuSiguiente": "submenu2-2",
+    "menuAnterior": "submenu2-3",
+    "botones": [
+      {
+        "id": "Boton2-1-1",
+        "label": "Cama 1",
+        "accion": "cama_1",
+        "img":"./assets/cama1.png",
+        "abreSubmenu": null
+      },
+      {
+        "id": "Boton2-1-2",
+        "label": "Cama 2",
+        "accion": "cono",
+        "img":"./assets/cama_generica.png",
+        "abreSubmenu": null
+      }
+    ]
+  },
+  {
+    "menuId": "submenu2-2",
+    "menuLabel":"Sillas",
+    "activo": false,
+    "submenuDe": "menuPrincipal",
+    "menuSiguiente": "submenu2-3",
+    "menuAnterior": "submenu2-1",
+    "botones": [
+      {
+        "id": "Boton2-2-1",
+        "label": "Silla 1",
+        "accion": "cambiarColor",
+        "img":"./assets/silla_generica.png",
+        "abreSubmenu": null
+      }
+    ]
+  },
+  {
+    "menuId": "submenu2-3",
+    "menuLabel":"Mesas",
+    "activo": false,
+    "submenuDe": "menuPrincipal",
+    "menuSiguiente": "submenu2-1",
+    "menuAnterior": "submenu2-2",
+    "botones": [
+      {
+        "id": "Boton2-3-1",
+        "label": "Mesa 1",
+        "accion": "cambiarColor",
+        "img":"./assets/cama_generica.png",
+        "abreSubmenu": null
+      }
+    ]
+  }
+]

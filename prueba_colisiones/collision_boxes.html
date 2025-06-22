@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Grabbables con Gravedad</title>
+    <script src="//aframe.io/releases/1.7.1/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/MozillaReality/ammo.js@8bbc0ea/builds/ammo.wasm.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.3/dist/aframe-physics-system.js"></script>
+  </head>
+  <body>
+    <a-scene physics="driver: ammo; debug: true; debugDrawMode: 1;">
+
+        <a-entity id="leftHand"  hand-tracking-grab-controls="hand: left;"></a-entity>
+        <a-entity id="rightHand" hand-tracking-grab-controls="hand: right;"></a-entity>
+        <!-- Suelo -->
+        <a-box position="0 0 -3" width="10" height="0.1" depth="10" color="#7BC8A4" ammo-body="type: static" ammo-shape="type: box"></a-box>
+
+        <!-- Caja 1 -->
+        <a-box class="grabbable" position="-1 2 -3" color="tomato"
+            ammo-body="type: dynamic" ammo-shape="type: box"
+                grabbable></a-box>
+
+        <!-- Caja 2 -->
+        <a-box class="grabbable" position="1 3 -3" color="orange"
+            ammo-body="type: dynamic" ammo-shape="type: box"
+                grabbable></a-box>
+
+    </a-scene>
+  </body>
+</html>

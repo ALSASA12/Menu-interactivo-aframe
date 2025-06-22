@@ -22,13 +22,13 @@ AFRAME.registerComponent('room-resizer', {
       this.floorEl = this.createFloor(scene);
   },
 
-  createWall: function (parent) {
-      let wall = document.createElement('a-entity');
-      wall.setAttribute('geometry', 'primitive: box');
-      wall.setAttribute('material', 'color: gray; side: double');
-      parent.appendChild(wall);
-      return wall;
-  },
+    createWall: function (parent) {
+        let wall = document.createElement('a-entity');
+        wall.setAttribute('gltf-model', './assets/brick_wall.glb');
+        wall.setAttribute('scale', '1 1 1'); // Ajusta según sea necesario
+        parent.appendChild(wall);
+        return wall;
+    },
 
   createFloor: function (parent) {
       let floor = document.createElement('a-entity');
