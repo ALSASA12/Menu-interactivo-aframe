@@ -1,17 +1,4 @@
 # 🎨 Design Room - Menú 3D Personalizable para A-Frame
-
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/674727/32120889-230ef110-bb0f-11e7-908c-76e39aa43149.jpg" width="400" alt="A-Frame compatible">
-</p>
-
-<p align="center"><b>Genera menús dinámicos y personalizables para entornos A-Frame desde un archivo JSON.</b></p>
-
-<p align="center">
-  <a href="https://www.npmjs.com/package/design-room"><img src="https://img.shields.io/npm/v/design-room.svg?style=flat-square" alt="Versión NPM"></a>
-  <a href="https://www.npmjs.com/package/design-room"><img src="https://img.shields.io/npm/dt/design-room.svg?style=flat-square" alt="Descargas"></a>
-  <a href="https://github.com/ALSASA12/design-room"><img src="https://img.shields.io/github/license/ALSASA12/design-room.svg?style=flat-square" alt="Licencia"></a>
-</p>
-
 ---
 
 ## 🚀 Instalación
@@ -87,10 +74,10 @@ Cada menú o submenú se define como un objeto dentro del array principal:
 | `menuId`       | Identificador único del menú. Utilizado para vincular submenús.                          |
 | `menuLabel`    | Texto que aparece como título visible del menú.                                          |
 | `activo`       | Si es `true`, este menú se muestra al inicio. Solo uno debe tener `activo: true`.        |
-| `submenuDe`    | Si es un submenú, indica el `menuId` del menú padre. Si es principal, se deja en `null`.|
-| `menuSiguiente`| `menuId` del siguiente menú en la secuencia. Puede ser `null`.                           |
-| `menuAnterior` | `menuId` del menú anterior. Puede ser `null`.                                            |
-| `botones`      | Array de botones que componen el menú. Cada uno puede tener acción o abrir un submenú.   |
+| `submenu`    | Si es un submenú, indica el `menuId` del menú padre. Si es principal, se deja en `null`.|
+| `nextMenu`| `menuId` del siguiente menú en la secuencia. Puede ser `null`.                           |
+| `previousMenu` | `menuId` del menú anterior. Puede ser `null`.                                            |
+| `buttons`      | Array de botones que componen el menú. Cada uno puede tener acción o abrir un submenú.   |
 
 **Dentro de cada botón:**
 
@@ -98,9 +85,9 @@ Cada menú o submenú se define como un objeto dentro del array principal:
 |----------------|------------------------------------------------------------------------------|
 | `id`           | Identificador único del botón.                                               |
 | `label`        | Texto visible en el botón.                                                   |
-| `accion`       | Acción que se ejecuta al pulsar el botón. Puede ser `null` si abre submenú. |
+| `action`       | Acción que se ejecuta al pulsar el botón. Puede ser `null` si abre submenú. |
 | `img`          | Ruta de la imagen que aparece en el botón.                                   |
-| `abreSubmenu`  | Si abre un submenú, indica el `menuId` correspondiente. `null` si no aplica.|
+| `openSubmenu`  | Si abre un submenú, indica el `menuId` correspondiente. `null` si no aplica.|
 
 ---
 
@@ -119,10 +106,4 @@ Cada menú o submenú se define como un objeto dentro del array principal:
 ¿Quieres mejorar el proyecto? ¡Pull requests y sugerencias son bienvenidas!  
 Puedes abrir un `Issue` o proponer mejoras directamente.
 
----
 
-## 📄 Licencia
-
-Este proyecto está distribuido bajo licencia **ISC**.
-
----

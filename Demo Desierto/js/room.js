@@ -101,5 +101,10 @@ AFRAME.registerComponent('room-resizer', {
       // Suelo
       this.floorEl.setAttribute('geometry', `width: ${data.ancho}; height: 0.2; depth: ${data.largo}`);
       this.floorEl.setAttribute('position', `0 -0.1 0`);
+      this.floorEl.setAttribute('material', {
+        src: './assets/brick_wall.jpg',
+        repeat: 'numeroX numeroY',
+        side: 'double'
+      });
   },
 });

@@ -1,10 +1,13 @@
 /* global AFRAME */
 AFRAME.registerComponent('menu', {
   schema: {
-    button_height: {default: 0.025},//Altura del boton
-    menu_data_path:{default:'./menu_data.json'},//ruta a archivo .json del menu
-    menu_width :{default: 0.6},//anchura del manu
-    menu_heigth:{default: 0.40},//largura del menu
+    //button_radius_bottom: {default: 0.4},
+    button_height: {default: 0.025},
+    //button_radius_top: {default:0.04},
+    
+    menu_width :{default: 0.6},
+    menu_heigth:{default: 0.40},
+    //menu_depth: {default: 0.01},
     button_color:        { default: '#3B82F6' }, // azul profesional (como botones de sistemas modernos)
     button_label_color:  { default: '#FFFFFF' }, // blanco para alto contraste
     menu_color:          { default: '#374151' }, // gris oscuro azulado (fondo elegante y neutro)
@@ -223,7 +226,7 @@ AFRAME.registerComponent('menu', {
     if (!menuEl) {
       alert('Error en el menu no cargo');
     }
-    fetch(menu_data_path)  // Se debe de poner la ruta desde index.html no la ruta desde este archivo
+    fetch('./menu_data.json')  // Se debe de poner la ruta desde index.html no la ruta desde este archivo
       .then(response => response.json())
       .then(data => {
         data.forEach((item) => {
