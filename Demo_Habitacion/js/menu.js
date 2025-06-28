@@ -119,11 +119,11 @@ AFRAME.registerComponent('menu', {
     buttonEl.setAttribute('menu-siguiente',menuSiguiente);
     buttonEl.setAttribute('menu-anterior',menuAnterior);
     //Añadimos la accion o el submenu
-    if (boton.abreSubmenu && boton.abreSubmenu.trim() !== "") {
+    if (boton.openSubmenu && boton.openSubmenu.trim() !== "") {
       buttonEl.setAttribute('sub-menu', '');
-      buttonEl.setAttribute('submenu-id',boton.abreSubmenu);
+      buttonEl.setAttribute('submenu-id',boton.openSubmenu);
     } else {
-      buttonEl.setAttribute(boton.accion,'')
+      buttonEl.setAttribute(boton.action,'')
     };
     buttonEl.setAttribute('position', '-1000 -1000 -1000');
     buttonEl.setAttribute('pressable','')
@@ -142,7 +142,7 @@ AFRAME.registerComponent('menu', {
     menuEl.appendChild(buttonEl);
 
   },
-  AppendMenuLabel: function(menu_label,menuId,submenuDe){
+  AppendMenuLabel: function(menu_label,menuId,submenu){
     var menuEL =document.querySelector('#menu');
     var labelEl = this.labelEl= document.createElement('a-entity');
     labelEl.setAttribute('position', `-1000 -1000 -1000`);
@@ -160,7 +160,7 @@ AFRAME.registerComponent('menu', {
     labelEl.setAttribute('id', menuId);
     labelEl.setAttribute('menu-tag',menuId);
     labelEl.setAttribute('sub-menu','');
-    labelEl.setAttribute('subMenu-Id',submenuDe);
+    labelEl.setAttribute('subMenu-Id',submenu);
     labelEl.setAttribute('label','')
     labelEl.setAttribute('pressable','')
     // Crear subentidad de texto visible
@@ -230,15 +230,15 @@ AFRAME.registerComponent('menu', {
       .then(response => response.json())
       .then(data => {
         data.forEach((item) => {
-          if (item.botones.length > 4) {//Controlamos que sean 4 botones o menos 
+          if (item.buttons.length > 4) {//Controlamos que sean 4 botones o menos 
             console.error(`El menú "${item.menuId}" tiene más de 4 botones.`);
             alert(`Error: El menú "${item.menuId}" no puede tener más de 4 botones.`);
             return;
           }
-          this.AppendMenuLabel(item.menuLabel,item.menuId,item.submenuDe)
+          this.AppendMenuLabel(item.menuLabel,item.menuId,item.submenu)
           //Unimos todos los botones
-          item.botones.forEach((boton) => {//Procesar botones
-            this.AppendButtons(boton,item.menuId,item.activo,item.menuSiguiente,item.menuAnterior);
+          item.buttons.forEach((boton) => {//Procesar botones
+            this.AppendButtons(boton,item.menuId,item.activo,item.nextMenu,item.previousMenu);
           });
           //Comprobamos cual es el menu con el que queremos empezar
           if (item.activo == 1 || item.activo == '1'){
