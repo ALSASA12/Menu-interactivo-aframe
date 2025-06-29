@@ -108,7 +108,7 @@
         "openSubmenu": null
       },
       {
-        "id": "Boton2-2-3",
+        "id": "Boton2-3-2",
         "label": "Mesilla",
         "action": "mesilla_1",
         "img":"./assets/mesilla_1.png",
