@@ -36,12 +36,22 @@ AFRAME.registerComponent('frigo_1', {
         assets.appendChild(modeloCama);
         assets.appendChild(materialCama);
     
-        let entity = document.createElement('a-entity');
-        entity.setAttribute('obj-model', 'obj: #frigo_1; mtl: #materialfrigo_1');
-        entity.setAttribute('position', '0 0.5 -2');
-        entity.setAttribute('scale', '0.01 0.01 0.01');
-        entity.setAttribute('rotation', '0 0 0');
-        entity.setAttribute('grabbable', '');
-        scene.appendChild(entity);
+        let collider = document.createElement('a-box');
+        collider.setAttribute('color', 'red');
+        collider.setAttribute('opacity', '0'); 
+        collider.setAttribute('grabbable', '');
+        collider.setAttribute('position', '0 0.5 -2');
+        collider.setAttribute('rotation', '0 0 0');
+        collider.setAttribute('width', 1);    // Anchura (X)
+        collider.setAttribute('height', 3.3);   // Altura (Y)
+        collider.setAttribute('depth', 0.7);    // Profundidad (Z) 
+        collider.setAttribute('visible', 'true'); // Visible para debug, luego lo puedes ocultar
+        
+        let entity_front = document.createElement('a-entity');
+        entity_front.setAttribute('obj-model', 'obj: #frigo_1; mtl: #materialfrigo_1');
+        entity_front.setAttribute('scale', '0.01 0.01 0.01');
+
+        collider.appendChild(entity_front)
+        scene.appendChild(collider);
     },
 });

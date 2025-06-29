@@ -123,7 +123,7 @@ Cuando el dedo se acerca a un botón, se emite el evento `pressedstarted`, que s
 AFRAME.registerComponent('mi-componente-interactivo', {
   init: function () {
     this.onPressStart = this.onPressStart.bind(this);
-    this.el.addEventListener('pressedstarted', this.onPressStart);
+    this.el.addEventListener('pressedended', this.onPressStart);
   },
   onPressStart: function (evt) {
     if (evt.target === this.el) {

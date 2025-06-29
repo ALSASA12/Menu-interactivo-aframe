@@ -124,7 +124,7 @@ When the finger approaches a button, a `pressedstarted` event is emitted, which 
 AFRAME.registerComponent('my-interactive-component', {
   init: function () {
     this.onPressStart = this.onPressStart.bind(this);
-    this.el.addEventListener('pressedstarted', this.onPressStart);
+    this.el.addEventListener('pressedended', this.onPressStart);
   },
   onPressStart: function (evt) {
     if (evt.target === this.el) {

@@ -6,6 +6,7 @@ AFRAME.registerComponent('mesilla_1', {
     init: function () {
         this.onPressStart = this.onPressStart.bind(this);
         this.el.addEventListener('pressedended', this.onPressStart);
+
     },
     onPressStart:function (evt) {
         var targetEl = evt.target;
@@ -36,12 +37,23 @@ AFRAME.registerComponent('mesilla_1', {
         assets.appendChild(modeloCama);
         assets.appendChild(materialCama);
     
-        let entity = document.createElement('a-entity');
-        entity.setAttribute('obj-model', 'obj: #modelomesilla; mtl: #materialmesilla');
-        entity.setAttribute('position', '0 0 -2');
-        entity.setAttribute('scale', '1.5 1.5 1.5');
-        entity.setAttribute('rotation', '0 0 0');
-        entity.setAttribute('grabbable', '');
-        scene.appendChild(entity);
+        let collider = document.createElement('a-box');
+        collider.setAttribute('color', 'red');
+        collider.setAttribute('opacity', '0'); 
+        collider.setAttribute('grabbable', '');
+        collider.setAttribute('position', '0 0 -2');
+        collider.setAttribute('rotation', '0 0 0');
+        collider.setAttribute('width', 0.7);    // Anchura (X)
+        collider.setAttribute('height', 2.3);   // Altura (Y)
+        collider.setAttribute('depth', 0.6);    // Profundidad (Z) 
+        collider.setAttribute('visible', 'true'); // Visible para debug, luego lo puedes ocultar
+        
+        let entity_front = document.createElement('a-entity');
+        entity_front.setAttribute('obj-model', 'obj: #modelomesilla; mtl: #materialmesilla');
+        entity_front.setAttribute('scale', '1.5 1.5 1.5');
+
+        collider.appendChild(entity_front)
+        scene.appendChild(collider);
+
     },
 });
