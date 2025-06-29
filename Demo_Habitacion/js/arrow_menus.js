@@ -59,7 +59,17 @@ AFRAME.registerComponent('arrow', {
         console.warn(`Distribución no definida para ${total} botones`);
         return;
       }
-  
+      if (label) {
+        const labelYOffset = 0.40 / 2 - 0.05;
+        if (visible){
+          label.setAttribute('position', `0 ${labelYOffset} 0.02`);
+          label.setAttribute('activo',true)
+        } else {
+          label.setAttribute('position',`-1000 -1000 -1000`);
+          label.setAttribute('activo',false)
+        }
+          
+      }
       botones.forEach((boton, i) => {
         const pos = layout[i];
         if (visible){
@@ -72,17 +82,7 @@ AFRAME.registerComponent('arrow', {
         
       });
   
-      if (label) {
-        const labelYOffset = 0.40 / 2 - 0.05;
-        if (visible){
-          label.setAttribute('position', `0 ${labelYOffset} 0.02`);
-          label.setAttribute('activo',true)
-        } else {
-          label.setAttribute('position',`-1000 -1000 -1000`);
-          label.setAttribute('activo',false)
-        }
-          
-      }
+
     },
   });
   
