@@ -7,7 +7,10 @@ AFRAME.registerComponent('arrow', {
         this.onPressStart = this.onPressStart.bind(this);
         this.el.addEventListener('pressedstarted', this.onPressStart);
     },
-    onPressStart:function (evt) {
+    delay: function (ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    },
+    onPressStart:async function (evt) {
         var targetEl = evt.target;
         var arrowId = this.el.id;
         var activos = document.querySelector('#menu').querySelectorAll('[activo="true"]');
@@ -20,11 +23,13 @@ AFRAME.registerComponent('arrow', {
             if (arrowId=='leftArrow'){
                 if (anteriorMenu!='null'){
                     this.ubicar_menu(menuId,false);
+                    await this.delay(1000);
                     this.ubicar_menu(anteriorMenu,true);
                 };            
             } else if (arrowId=='rightArrow') {
                 if (siguienteMenu!='null'){
                     this.ubicar_menu(menuId,false);
+                    await this.delay(1000);
                     this.ubicar_menu(siguienteMenu,true);
                 };
             };

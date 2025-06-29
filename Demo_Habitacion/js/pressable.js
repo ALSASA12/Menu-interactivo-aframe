@@ -11,11 +11,6 @@ AFRAME.registerComponent('pressable', {
   },
 
   tick: function () {
-    if (AFRAME.scenes[0].pressedObject && AFRAME.scenes[0].pressedObject !== this.el) {
-      // Otro objeto ya está siendo presionado, no hacer nada.
-      return;
-    }
-
     var handEls = this.handEls;
     var handEl;
     var distance;
@@ -23,21 +18,12 @@ AFRAME.registerComponent('pressable', {
       handEl = handEls[i];
       distance = this.calculateFingerDistance(handEl.components['hand-tracking-controls'].indexTipPosition);
       if (distance < this.data.pressDistance) {
-        if (!this.pressed) {
-          this.el.emit('pressedstarted');
-          AFRAME.scenes[0].pressedObject = this.el;
-        }
+        if (!this.pressed) { this.el.emit('pressedstarted'); }
         this.pressed = true;
         return;
       }
     }
-
-    if (this.pressed) {
-      this.el.emit('pressedended');
-      if (AFRAME.scenes[0].pressedObject === this.el) {
-        AFRAME.scenes[0].pressedObject = null;
-      }
-    }
+    if (this.pressed) { this.el.emit('pressedended'); }
     this.pressed = false;
   },
 
