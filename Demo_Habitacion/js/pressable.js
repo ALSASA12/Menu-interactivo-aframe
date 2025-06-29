@@ -8,23 +8,41 @@ AFRAME.registerComponent('pressable', {
     this.worldPosition = new THREE.Vector3();
     this.handEls = document.querySelectorAll('[hand-tracking-controls]');
     this.pressed = false;
+    this.pressStartTime = null;
+    this.delay = 1000; // 1 segundo en milisegundos
   },
 
   tick: function () {
     var handEls = this.handEls;
     var handEl;
     var distance;
+    var now = Date.now();
+
     for (var i = 0; i < handEls.length; i++) {
       handEl = handEls[i];
       distance = this.calculateFingerDistance(handEl.components['hand-tracking-controls'].indexTipPosition);
+
       if (distance < this.data.pressDistance) {
-        if (!this.pressed) { this.el.emit('pressedstarted'); }
-        this.pressed = true;
-        return;
+        // Si no se había empezado a contar el tiempo, lo iniciamos
+        if (this.pressStartTime === null) {
+          this.pressStartTime = now;
+        }
+
+        // Si ha pasado el delay y aún no se ha enviado el evento
+        if (!this.pressed && now - this.pressStartTime >= this.delay) {
+          this.el.emit('pressedstarted');
+          this.pressed = true;
+        }
+        return; // Ya está en rango, no seguimos buscando
       }
     }
-    if (this.pressed) { this.el.emit('pressedended'); }
+
+    // Si no está en rango, reseteamos todo
+    if (this.pressed) {
+      this.el.emit('pressedended');
+    }
     this.pressed = false;
+    this.pressStartTime = null;
   },
 
   calculateFingerDistance: function (fingerPosition) {
