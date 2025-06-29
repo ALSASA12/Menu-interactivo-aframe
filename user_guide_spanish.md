@@ -35,20 +35,46 @@ git clone https://github.com/ALSASA12/Menu-interactivo-aframe.git
 
 ### Opción 2: Descarga manual
 
-Accede al repositorio y descarga los archivos necesarios:
+Accede al repositorio a la carpeta menu_codigo y descarga los archivos necesarios:
 
-- `menu-component.js`
+- `arrow_menu.js`
 - `pressable-component.js`
 - `rounded-plane.js`
+- `menu.js`
+- `sub-menu.js`
 - Carpeta `assets/` con las imágenes de las flechas de navegación y los iconos de botones.
 
+Tienes un formato del .json de ejemplo para generar menu.
 ---
 
 ## ⚙️ Configuración básica
 
 ### Ejemplo de estructura del archivo `.json`
 
-Define los menús y botones de forma sencilla. En este ejemplo se crea un menú principal con 4 submenús, enlazados de forma circular mediante las flechas de dirección: Observar archivo menu_data.json en la carpeta menu_codigo
+Define los menús y botones de forma sencilla. En este ejemplo se crea un menú principal con 4 submenús, enlazados de forma circular mediante las flechas de dirección: Observar archivo menu_data.json en la carpeta menu_codigo.
+A continuacion se puede ver un ejemplo simplificado para generar un unico menu con un boton:
+
+```json
+[
+  {
+    "menuId": "menuPrincipal",
+    "menuLabel": "Menú inicial",
+    "activo": true,
+    "submenuDe": null,
+    "menuSiguiente": null,
+    "menuAnterior": null,
+    "botones": [
+      {
+        "id": "boton1",
+        "label": "Muebles",
+        "accion": null,
+        "img": "./assets/sofa_generico.png",
+        "abreSubmenu": "submenu2-1"
+      }
+    ]
+  }
+]
+```
 
 Parámetros de los menús
 | Campo          | Descripción                                      |
@@ -115,7 +141,7 @@ Cada botón puede tener:
 
 La interacción se basa en el componente `pressable` que detecta la punta del dedo índice.
 
-Cuando el dedo se acerca a un botón, se emite el evento `pressedstarted`, que se propaga por la escena y puede ser capturado en tus scripts.
+Cuando el dedo se acerca a un botón, se emite el evento `pressedstarted` y el evento `pressedended`, que se propaga por la escena y puede ser capturado en tus scripts.
 
 ### Ejemplo práctico de uso del evento:
 
@@ -138,7 +164,7 @@ AFRAME.registerComponent('mi-componente-interactivo', {
 ## 🎨 Personalización
 
 ✅ Modifica estilos visuales mediante `rounded-plane`.  
-✅ Cambia iconos o imágenes desde `menu_data.json`.  
+✅ Cambia iconos , imágenes , menus, el numero de botones y sus acciones desde `menu_data.json`.  
 ✅ Navega entre menús con `nextMenu` y `previousMenu`.  
 ✅ Personaliza colores, tamaño y estética desde los atributos HTML.  
 

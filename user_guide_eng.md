@@ -38,11 +38,14 @@ git clone https://github.com/ALSASA12/Menu-interactivo-aframe.git
 
 Download the required files from the repository:
 
-- `menu-component.js`
+- `arrow_menu.js`
 - `pressable-component.js`
 - `rounded-plane.js`
+- `menu.js`
+- `sub-menu.js`
 - `assets/` folder with navigation arrows and button icons.
 
+There is a example of the .json that generate the menu.
 ---
 
 ## ⚙️ Basic Configuration
@@ -50,6 +53,29 @@ Download the required files from the repository:
 ### Example of `.json` structure
 
 Menus and buttons are defined simply. See `menu_data.json` inside the `menu_codigo` folder for examples.
+Below you can see a simplified example to generate a single menu with one button:
+
+```json
+[
+  {
+    "menuId": "menuPrincipal",
+    "menuLabel": "Menú inicial",
+    "activo": true,
+    "submenuDe": null,
+    "menuSiguiente": null,
+    "menuAnterior": null,
+    "botones": [
+      {
+        "id": "boton1",
+        "label": "Muebles",
+        "accion": null,
+        "img": "./assets/sofa_generico.png",
+        "abreSubmenu": "submenu2-1"
+      }
+    ]
+  }
+]
+```
 
 ### Menu Parameters
 
@@ -116,7 +142,7 @@ Menus and buttons are defined simply. See `menu_data.json` inside the `menu_codi
 
 The system uses the `pressable` component to detect fingertip proximity.
 
-When the finger approaches a button, a `pressedstarted` event is emitted, which propagates through the scene and can be captured by your scripts.
+When the finger approaches a button, a `pressedstarted` event is emitted and the event `pressedended`, which propagates through the scene and can be captured by your scripts.
 
 ### Example of Capturing the Event
 
@@ -139,7 +165,7 @@ AFRAME.registerComponent('my-interactive-component', {
 ## 🎨 Customization
 
 ✅ Modify visual styles using `rounded-plane`.  
-✅ Change icons or images via `menu_data.json`.  
+✅ Change icons , images , menus and the numbers of bottons and his actions via `menu_data.json`.  
 ✅ Navigate between menus with `nextMenu` and `previousMenu`.  
 ✅ Customize colors, size, and appearance using HTML attributes.  
 
