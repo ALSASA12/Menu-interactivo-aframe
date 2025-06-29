@@ -5,7 +5,8 @@ AFRAME.registerComponent('mesa_2', {
     
     init: function () {
         this.onPressStart = this.onPressStart.bind(this);
-        this.el.addEventListener('pressedstarted', this.onPressStart);
+        this.el.addEventListener('pressedended', this.onPressStart);
+
     },
     onPressStart:function (evt) {
         var targetEl = evt.target;

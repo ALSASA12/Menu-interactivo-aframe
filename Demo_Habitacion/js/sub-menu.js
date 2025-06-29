@@ -5,19 +5,15 @@ AFRAME.registerComponent('sub-menu', {
   
     init: function () {
         this.onPressStart = this.onPressStart.bind(this);
-        this.el.addEventListener('pressedstarted', this.onPressStart);
+        this.el.addEventListener('pressedended', this.onPressStart);
     },
-    delay: function (ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
-    },
-    onPressStart:async function (evt) {
+    onPressStart:function (evt) {
         var targetEl = evt.target;
         var subMenuId = this.el.getAttribute('submenu-id');
         var menuId =this.el.getAttribute('menu-tag');
         if (targetEl === this.el){
           if (subMenuId!='null'){
             this.ubicar_menu(menuId,false);
-            await this.delay(1000);
             this.ubicar_menu(subMenuId,true);
           }
         }

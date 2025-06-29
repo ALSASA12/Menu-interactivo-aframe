@@ -5,12 +5,9 @@ AFRAME.registerComponent('arrow', {
   
     init: function () {
         this.onPressStart = this.onPressStart.bind(this);
-        this.el.addEventListener('pressedstarted', this.onPressStart);
+        this.el.addEventListener('pressedended', this.onPressStart);
     },
-    delay: function (ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
-    },
-    onPressStart:async function (evt) {
+    onPressStart:function (evt) {
         var targetEl = evt.target;
         var arrowId = this.el.id;
         var activos = document.querySelector('#menu').querySelectorAll('[activo="true"]');
@@ -23,13 +20,11 @@ AFRAME.registerComponent('arrow', {
             if (arrowId=='leftArrow'){
                 if (anteriorMenu!='null'){
                     this.ubicar_menu(menuId,false);
-                    await this.delay(1000);
                     this.ubicar_menu(anteriorMenu,true);
                 };            
             } else if (arrowId=='rightArrow') {
                 if (siguienteMenu!='null'){
                     this.ubicar_menu(menuId,false);
-                    await this.delay(1000);
                     this.ubicar_menu(siguienteMenu,true);
                 };
             };
@@ -64,17 +59,7 @@ AFRAME.registerComponent('arrow', {
         console.warn(`Distribución no definida para ${total} botones`);
         return;
       }
-      if (label) {
-        const labelYOffset = 0.40 / 2 - 0.05;
-        if (visible){
-          label.setAttribute('position', `0 ${labelYOffset} 0.02`);
-          label.setAttribute('activo',true)
-        } else {
-          label.setAttribute('position',`-1000 -1000 -1000`);
-          label.setAttribute('activo',false)
-        }
-          
-      }
+  
       botones.forEach((boton, i) => {
         const pos = layout[i];
         if (visible){
@@ -87,7 +72,17 @@ AFRAME.registerComponent('arrow', {
         
       });
   
-
+      if (label) {
+        const labelYOffset = 0.40 / 2 - 0.05;
+        if (visible){
+          label.setAttribute('position', `0 ${labelYOffset} 0.02`);
+          label.setAttribute('activo',true)
+        } else {
+          label.setAttribute('position',`-1000 -1000 -1000`);
+          label.setAttribute('activo',false)
+        }
+          
+      }
     },
   });
   
