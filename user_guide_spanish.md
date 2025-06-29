@@ -60,16 +60,16 @@ A continuacion se puede ver un ejemplo simplificado para generar un unico menu c
     "menuId": "menuPrincipal",
     "menuLabel": "Menú inicial",
     "activo": true,
-    "submenuDe": null,
-    "menuSiguiente": null,
-    "menuAnterior": null,
+    "submenu": null,
+    "nextMenu": null,
+    "previousMenu": null,
     "botones": [
       {
         "id": "boton1",
         "label": "Muebles",
-        "accion": null,
+        "action": null,
         "img": "./assets/sofa_generico.png",
-        "abreSubmenu": "submenu2-1"
+        "openSubmenu": "submenu2-1"
       }
     ]
   }
