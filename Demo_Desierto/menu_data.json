@@ -105,9 +105,9 @@
       },
       {
         "id": "Boton1-3-2",
-        "label": "Oasis",
-        "action": "oasis",
-        "img":"./assets/oasis.png",
+        "label": "Pozo",
+        "action": "pozo",
+        "img":"./assets/pozo.png",
         "openSubmenu": null
       }
     ]

@@ -1,4 +1,4 @@
-AFRAME.registerComponent('oasis', {
+AFRAME.registerComponent('pozo', {
     schema: {
         menuId: { type: 'string' }
       },
@@ -26,12 +26,12 @@ AFRAME.registerComponent('oasis', {
     
         // Creamos el <a-asset-item> para guardar info .obj y .mtl
         let modeloCama = document.createElement('a-asset-item');
-        modeloCama.setAttribute('id', 'oasis');
-        modeloCama.setAttribute('src', './assets/models/oasis.obj');
+        modeloCama.setAttribute('id', 'pozo');
+        modeloCama.setAttribute('src', './assets/models/pozo.obj');
     
         let materialCama = document.createElement('a-asset-item');
-        materialCama.setAttribute('id', 'materialoasis');
-        materialCama.setAttribute('src', './assets/models/oasis.mtl');
+        materialCama.setAttribute('id', 'materialpozo');
+        materialCama.setAttribute('src', './assets/models/pozo.mtl');
     
         assets.appendChild(modeloCama);
         assets.appendChild(materialCama);
@@ -48,7 +48,7 @@ AFRAME.registerComponent('oasis', {
         collider.setAttribute('visible', 'true'); // Visible para debug, luego lo puedes ocultar
         
         let entity_front = document.createElement('a-entity');
-        entity_front.setAttribute('obj-model', 'obj: #oasis; mtl: #materialoasis');
+        entity_front.setAttribute('obj-model', 'obj: #oasis; mtl: #materialpozo');
         entity_front.setAttribute('scale', '0.01 0.01 0.01');
 
         collider.appendChild(entity_front)
