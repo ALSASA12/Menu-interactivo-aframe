@@ -1,0 +1,136 @@
+[
+  {
+    "menuId": "menuPrincipal",
+    "menuLabel":"Menu inicial",
+    "activo": true,
+    "submenu": null,
+    "nextMenu": null,
+    "previousMenu": null,
+    "buttons": [
+      {
+        "id": "boton1",
+        "label": "Muebles",
+        "action": null,
+        "img":"./assets/sofa_generico.png",
+        "openSubmenu": "submenu2-3"
+      },
+      {
+        "id": "boton2",
+        "label": "Camas",
+        "action": null,
+        "img":"./assets/cama_generica.png",
+        "openSubmenu": "submenu2-1"
+      },
+      {
+        "id": "boton3",
+        "label": "Mesas",
+        "action": null,
+        "img":"./assets/mesa_generica.png",
+        "openSubmenu": "submenu2-2"
+      },
+      {
+        "id": "boton4",
+        "label": "Sillas",
+        "action": null,
+        "img":"./assets/silla_generica.png",
+        "openSubmenu": "submenu2-4"
+      }
+    ]
+  },
+  {
+    "menuId": "submenu2-1",
+    "menuLabel":"Camas",
+    "activo": false,
+    "submenu": "menuPrincipal",
+    "nextMenu": "submenu2-2",
+    "previousMenu": "submenu2-4",
+    "buttons": [
+      {
+        "id": "Boton2-1-1",
+        "label": "Cama 1",
+        "action": "cama_1",
+        "img":"./assets/cama_1.png",
+        "openSubmenu": null
+      },
+      {
+        "id": "Boton2-1-2",
+        "label": "Cama 2",
+        "action": "cama_2",
+        "img":"./assets/cama_2.png",
+        "openSubmenu": null
+      }
+    ]
+  },
+  {
+    "menuId": "submenu2-2",
+    "menuLabel":"Mesas",
+    "activo": false,
+    "submenu": "menuPrincipal",
+    "nextMenu": "submenu2-3",
+    "previousMenu": "submenu2-1",
+    "buttons": [
+      {
+        "id": "Boton2-2-1",
+        "label": "Mesa 1",
+        "action": "mesa_1",
+        "img":"./assets/mesa_1.png",
+        "openSubmenu": null
+      },
+      {
+        "id": "Boton2-2-2",
+        "label": "Mesa 2",
+        "action": "mesa_2",
+        "img":"./assets/mesa_2.png",
+        "openSubmenu": null
+      },
+      {
+        "id": "Boton2-2-3",
+        "label": "Mesa 3",
+        "action": "mesa_3",
+        "img":"./assets/mesa_3.png",
+        "openSubmenu": null
+      }
+    ]
+  },
+  {
+    "menuId": "submenu2-3",
+    "menuLabel":"Muebles mix",
+    "activo": false,
+    "submenu": "menuPrincipal",
+    "nextMenu": "submenu2-4",
+    "previousMenu": "submenu2-2",
+    "buttons": [
+      {
+        "id": "Boton2-3-1",
+        "label": "Frigorifico",
+        "action": "frigo_1",
+        "img":"./assets/frigo_1.png",
+        "openSubmenu": null
+      },
+      {
+        "id": "Boton2-3-2",
+        "label": "Mesilla",
+        "action": "mesilla_1",
+        "img":"./assets/mesilla_1.png",
+        "openSubmenu": null
+      }
+    ]
+  },
+  {
+    "menuId": "submenu2-4",
+    "menuLabel":"Sillas",
+    "activo": false,
+    "submenu": "menuPrincipal",
+    "nextMenu": "submenu2-1",
+    "previousMenu": "submenu2-3",
+    "buttons": [
+      {
+        "id": "Boton2-4-1",
+        "label": "Silla 1",
+        "action": "Silla_1",
+        "img":"./assets/silla_1.png",
+        "openSubmenu": null
+      }
+    ]
+  }
+]
