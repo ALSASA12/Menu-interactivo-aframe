@@ -57,8 +57,7 @@ AFRAME.registerComponent('room-resizer', {
         normalMap: 'url(./assets/textures/brick_wall_001_nor_gl_4k.jpg)',
         roughnessMap: 'url(./assets/textures/brick_wall_001_rough_4k.jpg)',
         displacementMap: 'url(./assets/textures/brick_wall_001_displacement_4k.png)',
-        repeat: '5 2',
-        side: 'double'
+        repeat: '5 2'
       });
       this.wall2El.setAttribute('material', {
         shader: 'standard',
@@ -67,7 +66,6 @@ AFRAME.registerComponent('room-resizer', {
         roughnessMap: 'url(./assets/textures/brick_wall_001_rough_4k.jpg)',
         displacementMap: 'url(./assets/textures/brick_wall_001_displacement_4k.png)',
         repeat: '5 2',
-        side: 'double'
       });
       this.wall3El.setAttribute('material', {
         shader: 'standard',
@@ -76,7 +74,6 @@ AFRAME.registerComponent('room-resizer', {
         roughnessMap: 'url(./assets/textures/brick_wall_001_rough_4k.jpg)',
         displacementMap: 'url(./assets/textures/brick_wall_001_displacement_4k.png)',
         repeat: '5 2',
-        side: 'double'
       });
       this.wall4El.setAttribute('material', {
         shader: 'standard',
@@ -85,7 +82,6 @@ AFRAME.registerComponent('room-resizer', {
         roughnessMap: 'url(./assets/textures/brick_wall_001_rough_4k.jpg)',
         displacementMap: 'url(./assets/textures/brick_wall_001_displacement_4k.png)',
         repeat: '5 2',
-        side: 'double'
       });
       
       // Posicion paredes

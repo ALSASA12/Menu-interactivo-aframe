@@ -6,6 +6,7 @@ AFRAME.registerComponent('cama_1', {
     init: function () {
         this.onPressStart = this.onPressStart.bind(this);
         this.el.addEventListener('pressedstarted', this.onPressStart);
+        
     },
     onPressStart:function (evt) {
         var targetEl = evt.target;
@@ -38,9 +39,9 @@ AFRAME.registerComponent('cama_1', {
     
         let entity = document.createElement('a-entity');
         entity.setAttribute('obj-model', 'obj: #modeloCama_1; mtl: #materialCama_1');
-        entity.setAttribute('position', '1 1 1');
+        entity.setAttribute('position', '0 0.5 -2');
         entity.setAttribute('scale', '1.5 1.5 1.5');
-        entity.setAttribute('rotation', '0 0 0');
+        entity.setAttribute('rotation', '0 90 0');
         entity.setAttribute('grabbable', '');
         scene.appendChild(entity);
     },
