@@ -27,11 +27,11 @@ AFRAME.registerComponent('serpiente', {
         // Creamos el <a-asset-item> para guardar info .obj y .mtl
         let modeloCama = document.createElement('a-asset-item');
         modeloCama.setAttribute('id', 'serpiente');
-        modeloCama.setAttribute('src', './assets/models/serpiente.obj');
+        modeloCama.setAttribute('src', './assets/models/13106_Corn_Snake_v1_l2.obj');
     
         let materialCama = document.createElement('a-asset-item');
         materialCama.setAttribute('id', 'materialserpiente');
-        materialCama.setAttribute('src', './assets/models/serpiente.mtl');
+        materialCama.setAttribute('src', './assets/models/13106_Corn_Snake_v1_l2.mtl');
     
         assets.appendChild(modeloCama);
         assets.appendChild(materialCama);
@@ -40,11 +40,11 @@ AFRAME.registerComponent('serpiente', {
         collider.setAttribute('color', 'red');
         collider.setAttribute('opacity', '0'); 
         collider.setAttribute('grabbable', '');
-        collider.setAttribute('position', '0 0.5 -2');
-        collider.setAttribute('rotation', '0 0 0');
-        collider.setAttribute('width', 1);    // Anchura (X)
-        collider.setAttribute('height', 3.3);   // Altura (Y)
-        collider.setAttribute('depth', 0.7);    // Profundidad (Z) 
+        collider.setAttribute('position', '0 0 -2');
+        collider.setAttribute('rotation', '-90 0 0');
+        collider.setAttribute('width', 0.5);    // Anchura (X)
+        collider.setAttribute('height', 0.5);   // Altura (Y)
+        collider.setAttribute('depth', 0.5);    // Profundidad (Z) 
         collider.setAttribute('visible', 'true'); // Visible para debug, luego lo puedes ocultar
         
         let entity_front = document.createElement('a-entity');

@@ -27,11 +27,11 @@ AFRAME.registerComponent('camello', {
         // Creamos el <a-asset-item> para guardar info .obj y .mtl
         let modeloCama = document.createElement('a-asset-item');
         modeloCama.setAttribute('id', 'camello');
-        modeloCama.setAttribute('src', './assets/models/camello.obj');
+        modeloCama.setAttribute('src', './assets/models/camel.obj');
     
         let materialCama = document.createElement('a-asset-item');
         materialCama.setAttribute('id', 'materialcamello');
-        materialCama.setAttribute('src', './assets/models/camello.mtl');
+        materialCama.setAttribute('src', './assets/models/camel.mtl');
     
         assets.appendChild(modeloCama);
         assets.appendChild(materialCama);
@@ -40,16 +40,16 @@ AFRAME.registerComponent('camello', {
         collider.setAttribute('color', 'red');
         collider.setAttribute('opacity', '0'); 
         collider.setAttribute('grabbable', '');
-        collider.setAttribute('position', '0 0.5 -2');
-        collider.setAttribute('rotation', '0 0 0');
+        collider.setAttribute('position', '0 0 -2');
+        collider.setAttribute('rotation', '-90 0 0');
         collider.setAttribute('width', 1);    // Anchura (X)
-        collider.setAttribute('height', 3.3);   // Altura (Y)
-        collider.setAttribute('depth', 0.7);    // Profundidad (Z) 
+        collider.setAttribute('height', 2.5);   // Altura (Y)
+        collider.setAttribute('depth', 6);    // Profundidad (Z) 
         collider.setAttribute('visible', 'true'); // Visible para debug, luego lo puedes ocultar
         
         let entity_front = document.createElement('a-entity');
         entity_front.setAttribute('obj-model', 'obj: #camello; mtl: #materialcamello');
-        entity_front.setAttribute('scale', '0.01 0.01 0.01');
+        entity_front.setAttribute('scale', '0.005 0.005 0.005');
 
         collider.appendChild(entity_front)
         scene.appendChild(collider);

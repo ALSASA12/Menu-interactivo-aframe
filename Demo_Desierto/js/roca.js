@@ -27,11 +27,11 @@ AFRAME.registerComponent('roca', {
         // Creamos el <a-asset-item> para guardar info .obj y .mtl
         let modeloCama = document.createElement('a-asset-item');
         modeloCama.setAttribute('id', 'roca');
-        modeloCama.setAttribute('src', './assets/models/roca.obj');
+        modeloCama.setAttribute('src', './assets/models/rock.obj');
     
         let materialCama = document.createElement('a-asset-item');
         materialCama.setAttribute('id', 'materialroca');
-        materialCama.setAttribute('src', './assets/models/roca.mtl');
+        materialCama.setAttribute('src', './assets/models/rock.mtl');
     
         assets.appendChild(modeloCama);
         assets.appendChild(materialCama);
@@ -42,15 +42,15 @@ AFRAME.registerComponent('roca', {
         collider.setAttribute('grabbable', '');
         collider.setAttribute('position', '0 0.5 -2');
         collider.setAttribute('rotation', '0 0 0');
-        collider.setAttribute('width', 1);    // Anchura (X)
-        collider.setAttribute('height', 3.3);   // Altura (Y)
-        collider.setAttribute('depth', 0.7);    // Profundidad (Z) 
+        collider.setAttribute('width', 1.6);    // Anchura (X)
+        collider.setAttribute('height', 1);   // Altura (Y)
+        collider.setAttribute('depth', 1.5);    // Profundidad (Z) 
         collider.setAttribute('visible', 'true'); // Visible para debug, luego lo puedes ocultar
         
         let entity_front = document.createElement('a-entity');
         entity_front.setAttribute('obj-model', 'obj: #roca; mtl: #materialroca');
-        entity_front.setAttribute('scale', '0.01 0.01 0.01');
-
+        entity_front.setAttribute('scale', '1 1 1');
+        entity_front.setAttribute('position', '-1.3 1.3 1.3');
         collider.appendChild(entity_front)
         scene.appendChild(collider);
     },

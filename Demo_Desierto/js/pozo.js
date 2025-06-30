@@ -36,19 +36,18 @@ AFRAME.registerComponent('pozo', {
         assets.appendChild(modeloCama);
         assets.appendChild(materialCama);
     
-        let collider = document.createElement('a-box');
+        let collider = document.createElement('a-cylinder');
         collider.setAttribute('color', 'red');
         collider.setAttribute('opacity', '0'); 
         collider.setAttribute('grabbable', '');
-        collider.setAttribute('position', '0 0.5 -2');
+        collider.setAttribute('position', '0 0 -2');
         collider.setAttribute('rotation', '0 0 0');
-        collider.setAttribute('width', 1);    // Anchura (X)
-        collider.setAttribute('height', 3.3);   // Altura (Y)
-        collider.setAttribute('depth', 0.7);    // Profundidad (Z) 
+        collider.setAttribute('radius',0.9)
+        collider.setAttribute('height',0.5)    // Profundidad (Z) 
         collider.setAttribute('visible', 'true'); // Visible para debug, luego lo puedes ocultar
         
         let entity_front = document.createElement('a-entity');
-        entity_front.setAttribute('obj-model', 'obj: #oasis; mtl: #materialpozo');
+        entity_front.setAttribute('obj-model', 'obj: #pozo; mtl: #materialpozo');
         entity_front.setAttribute('scale', '0.01 0.01 0.01');
 
         collider.appendChild(entity_front)

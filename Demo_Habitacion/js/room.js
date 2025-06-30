@@ -53,35 +53,35 @@ AFRAME.registerComponent('room-resizer', {
 
       this.wall1El.setAttribute('material', {
         shader: 'standard',
-        src: 'url(./assets/textures/brick_wall_001_diffuse_4k.jpg)',
+        src: 'url(./assets/textures/brick_wall_door.png)',
         normalMap: 'url(./assets/textures/brick_wall_001_nor_gl_4k.jpg)',
         roughnessMap: 'url(./assets/textures/brick_wall_001_rough_4k.jpg)',
         displacementMap: 'url(./assets/textures/brick_wall_001_displacement_4k.png)',
-        repeat: '5 2'
+        repeat: '1 1'
       });
       this.wall2El.setAttribute('material', {
         shader: 'standard',
-        src: 'url(./assets/textures/brick_wall_001_diffuse_4k.jpg)',
+        src: 'url(./assets/textures/brick_wall_painting.png)',
         normalMap: 'url(./assets/textures/brick_wall_001_nor_gl_4k.jpg)',
         roughnessMap: 'url(./assets/textures/brick_wall_001_rough_4k.jpg)',
         displacementMap: 'url(./assets/textures/brick_wall_001_displacement_4k.png)',
-        repeat: '5 2',
+        repeat: '1 1',
       });
       this.wall3El.setAttribute('material', {
         shader: 'standard',
-        src: 'url(./assets/textures/brick_wall_001_diffuse_4k.jpg)',
+        src: 'url(./assets/textures/brick_wall_window.png)',
         normalMap: 'url(./assets/textures/brick_wall_001_nor_gl_4k.jpg)',
         roughnessMap: 'url(./assets/textures/brick_wall_001_rough_4k.jpg)',
         displacementMap: 'url(./assets/textures/brick_wall_001_displacement_4k.png)',
-        repeat: '5 2',
+        repeat: '1 1',
       });
       this.wall4El.setAttribute('material', {
         shader: 'standard',
-        src: 'url(./assets/textures/brick_wall_001_diffuse_4k.jpg)',
+        src: 'url(./assets/textures/brick_wall_flower.png)',
         normalMap: 'url(./assets/textures/brick_wall_001_nor_gl_4k.jpg)',
         roughnessMap: 'url(./assets/textures/brick_wall_001_rough_4k.jpg)',
         displacementMap: 'url(./assets/textures/brick_wall_001_displacement_4k.png)',
-        repeat: '5 2',
+        repeat: '1 1',
       });
       
       // Posicion paredes

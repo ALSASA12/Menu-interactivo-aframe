@@ -27,11 +27,11 @@ AFRAME.registerComponent('palmera', {
         // Creamos el <a-asset-item> para guardar info .obj y .mtl
         let modeloCama = document.createElement('a-asset-item');
         modeloCama.setAttribute('id', 'palmera');
-        modeloCama.setAttribute('src', './assets/models/palmera.obj');
+        modeloCama.setAttribute('src', './assets/models/10446_Palm_Tree_v1_max2010_iteration-2.obj');
     
         let materialCama = document.createElement('a-asset-item');
         materialCama.setAttribute('id', 'materialpalmera');
-        materialCama.setAttribute('src', './assets/models/palmera.mtl');
+        materialCama.setAttribute('src', './assets/models/10446_Palm_Tree_v1_max2010_iteration-2.mtl');
     
         assets.appendChild(modeloCama);
         assets.appendChild(materialCama);
@@ -40,11 +40,11 @@ AFRAME.registerComponent('palmera', {
         collider.setAttribute('color', 'red');
         collider.setAttribute('opacity', '0'); 
         collider.setAttribute('grabbable', '');
-        collider.setAttribute('position', '0 0.5 -2');
-        collider.setAttribute('rotation', '0 0 0');
-        collider.setAttribute('width', 1);    // Anchura (X)
-        collider.setAttribute('height', 3.3);   // Altura (Y)
-        collider.setAttribute('depth', 0.7);    // Profundidad (Z) 
+        collider.setAttribute('position', '0 0 -2');
+        collider.setAttribute('rotation', '-90 0 0');
+        collider.setAttribute('width', 0.6);    // Anchura (X)
+        collider.setAttribute('height', 0.6);   // Altura (Y)
+        collider.setAttribute('depth', 20);    // Profundidad (Z) 
         collider.setAttribute('visible', 'true'); // Visible para debug, luego lo puedes ocultar
         
         let entity_front = document.createElement('a-entity');
