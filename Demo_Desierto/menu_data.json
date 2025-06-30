@@ -8,14 +8,14 @@
     "previousMenu": "menu1-3",
     "buttons": [
       {
-        "id": "boton1",
+        "id": "boton1-1-1",
         "label": "Plantas",
         "action": null,
         "img":"./assets/palmera.png",
         "openSubmenu": "submenu2-1"
       },
       {
-        "id": "boton2",
+        "id": "boton1-1-1",
         "label": "Animales",
         "action": null,
         "img":"./assets/camello.png",
@@ -80,7 +80,7 @@
     "previousMenu": "menu1-1",
     "buttons": [
       {
-        "id": "Boton2-2-1",
+        "id": "Boton1-2-1",
         "label": "Luz",
         "action": "dark_mode",
         "img":"./assets/bombilla.png",
