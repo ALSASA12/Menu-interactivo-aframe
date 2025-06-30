@@ -49,7 +49,7 @@
         "id": "Boton2-1-1",
         "label": "Cama 1",
         "action": "cama_1",
-        "img":"./assets/cama_1.png",
+        "img":"./assets/cama_generica..png",
         "openSubmenu": null
       },
       {
@@ -87,7 +87,7 @@
         "id": "Boton2-2-3",
         "label": "Mesa 3",
         "action": "mesa_3",
-        "img":"./assets/mesa_3.png",
+        "img":"./assets/mesa_generica.png",
         "openSubmenu": null
       }
     ]
