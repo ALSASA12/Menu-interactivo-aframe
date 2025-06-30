@@ -9,7 +9,7 @@
 </head>
 <body>
   <a-scene physics="driver: ammo; gravity: 0 0 -9.8; debug: true">
-    <a-entity id="leftHand"  hand-tracking-grab-controls="hand: left;"></a-entity>
+    <a-entity id="leftHand"  hand-tracking-grab-controls="hand: left;" watch></a-entity>
     <a-entity id="rightHand" hand-tracking-grab-controls="hand: right;"></a-entity>
     <!-- Generar la habitación automáticamente -->
     <a-entity room-resizer="altura: 5; ancho: 12; largo: 12"></a-entity>
@@ -21,6 +21,7 @@
     <a-entity menu ></a-entity>
   </a-scene>
 </body>
+<script src="./js/watch.js"></script>
 <script src="./js/room.js"></script>
 <script src="./js/menu.js"></script>
 <script src="./js/sub-menu.js"></script>
