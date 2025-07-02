@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/MozillaReality/ammo.js@8bbc0ea/builds/ammo.wasm.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.js"></script>
   <script src="https://gftruj.github.io/hand.tracking.controls.extras/dist/aframe-hand-tracking-controls-extras.js"></script>
-  <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
 </head>
 <body>
-  <a-scene embedded arjs>
+  <a-scene xr-mode-ui="XRMode: xr">
     <a-entity id="leftHand"  hand-tracking-grab-controls="hand: left;"></a-entity>
     <a-entity id="rightHand" hand-tracking-grab-controls="hand: right;"></a-entity>
     <!-- Controlador de cámara -->
