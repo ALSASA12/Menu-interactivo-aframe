@@ -1,45 +1,47 @@
-# 🎨 Design Room - Menú 3D Personalizable para A-Frame
+
+# 🎨 Design Room - Customizable 3D Menu for A-Frame
+
 ---
 
-## 🚀 Instalación
+## 🚀 Installation
 
-Instala la librería mediante npm:
+Install the library via npm:
 
 ```bash
 npm install design-room
 ```
 
-O inclúyelo directamente en el navegador:
+Or include it directly in the browser:
 
 ```html
-<script src="./ruta/a/design-room/index.js"></script>
+<script src="./path/to/design-room/index.js"></script>
 ```
 
 ---
 
-## 🛠️ Uso Básico
+## 🛠️ Basic Usage
 
-1️⃣ Crea un archivo `menu_data.json` en el mismo directorio que tu archivo `.html`.  
-2️⃣ Define tus menús de manera jerárquica.  
-3️⃣ La librería generará el menú automáticamente al cargar la escena.
+1️⃣ Create a `menu_data.json` file in the same directory as your `.html` file.  
+2️⃣ Define your menus in a hierarchical structure.  
+3️⃣ The library will automatically generate the menu when the scene loads.
 
-**Ejemplo mínimo de `menu_data.json`:**
+**Minimal example of `menu_data.json`:**
 
 ```json
 [
   {
-    "menuId": "menuPrincipal",
-    "menuLabel": "Menú inicial",
+    "menuId": "mainMenu",
+    "menuLabel": "Start Menu",
     "activo": true,
     "submenuDe": null,
     "menuSiguiente": null,
     "menuAnterior": null,
     "botones": [
       {
-        "id": "boton1",
-        "label": "Muebles",
+        "id": "button1",
+        "label": "Furniture",
         "accion": null,
-        "img": "./assets/sofa_generico.png",
+        "img": "./assets/sofa_generic.png",
         "abreSubmenu": "submenu2-1"
       }
     ]
@@ -47,7 +49,7 @@ O inclúyelo directamente en el navegador:
 ]
 ```
 
-**Ejemplo de uso en HTML:**
+**Example of use in HTML:**
 
 ```html
 <html>
@@ -57,7 +59,7 @@ O inclúyelo directamente en el navegador:
   </head>
   <body>
     <a-scene>
-      <!-- Aquí se mostrará el menú generado -->
+      <!-- The menu will be generated here -->
     </a-scene>
   </body>
 </html>
@@ -65,45 +67,43 @@ O inclúyelo directamente en el navegador:
 
 ---
 
-## 📁 Estructura del JSON - Explicación Completa
+## 📁 JSON Structure - Full Explanation
 
-Cada menú o submenú se define como un objeto dentro del array principal:
+Each menu or submenu is defined as an object within the main array:
 
-| Campo           | Descripción                                                                               |
-|-----------------|-------------------------------------------------------------------------------------------|
-| `menuId`       | Identificador único del menú. Utilizado para vincular submenús.                          |
-| `menuLabel`    | Texto que aparece como título visible del menú.                                          |
-| `activo`       | Si es `true`, este menú se muestra al inicio. Solo uno debe tener `activo: true`.        |
-| `submenu`    | Si es un submenú, indica el `menuId` del menú padre. Si es principal, se deja en `null`.|
-| `nextMenu`| `menuId` del siguiente menú en la secuencia. Puede ser `null`.                           |
-| `previousMenu` | `menuId` del menú anterior. Puede ser `null`.                                            |
-| `buttons`      | Array de botones que componen el menú. Cada uno puede tener acción o abrir un submenú.   |
+| Field           | Description                                                                 |
+|-----------------|-----------------------------------------------------------------------------|
+| `menuId`        | Unique identifier for the menu. Used to link submenus.                     |
+| `menuLabel`     | Text displayed as the menu's visible title.                                |
+| `activo`        | If `true`, this menu is shown at startup. Only one should be `true`.       |
+| `submenuDe`     | If it's a submenu, indicates the parent menu's `menuId`. `null` otherwise.|
+| `menuSiguiente` | `menuId` of the next menu in the sequence. Can be `null`.                  |
+| `menuAnterior`  | `menuId` of the previous menu. Can be `null`.                             |
+| `botones`       | Array of buttons in the menu. Each can trigger an action or open a submenu.|
 
-**Dentro de cada botón:**
+**Inside each button:**
 
-| Campo          | Descripción                                                                  |
-|----------------|------------------------------------------------------------------------------|
-| `id`           | Identificador único del botón.                                               |
-| `label`        | Texto visible en el botón.                                                   |
-| `action`       | Acción que se ejecuta al pulsar el botón. Puede ser `null` si abre submenú. |
-| `img`          | Ruta de la imagen que aparece en el botón.                                   |
-| `openSubmenu`  | Si abre un submenú, indica el `menuId` correspondiente. `null` si no aplica.|
-
----
-
-## ✨ Características
-
-✅ Generación automática de menús en A-Frame  
-✅ Soporte para submenús encadenados y navegación cíclica  
-✅ Imágenes personalizadas en los botones  
-✅ Configuración 100% mediante JSON  
-✅ Compatible con proyectos de realidad virtual y 3D en navegador  
+| Field            | Description                                                               |
+|------------------|---------------------------------------------------------------------------|
+| `id`             | Unique identifier for the button.                                         |
+| `label`          | Text displayed on the button.                                             |
+| `accion`         | Action executed when clicking the button. Can be `null` if it opens submenu.|
+| `img`            | Path to the image displayed on the button.                                |
+| `abreSubmenu`    | If it opens a submenu, specifies the corresponding `menuId`. `null` otherwise.|
 
 ---
 
-## 🤝 Contribuciones
+## ✨ Features
 
-¿Quieres mejorar el proyecto? ¡Pull requests y sugerencias son bienvenidas!  
-Puedes abrir un `Issue` o proponer mejoras directamente.
+✅ Automatic menu generation in A-Frame  
+✅ Supports chained submenus and cyclic navigation  
+✅ Custom images on buttons  
+✅ Fully configurable via JSON  
+✅ Compatible with VR and 3D web projects  
 
+---
 
+## 🤝 Contributing
+
+Want to improve the project? Pull requests and suggestions are welcome!  
+You can open an `Issue` or propose improvements directly.
